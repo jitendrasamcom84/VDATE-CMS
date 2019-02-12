@@ -1,0 +1,107 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="responsesForm" role="form" ng-submit="responsesForm.$valid && responsesSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Answer</span>
+                                <span ng-show="is_edit">Edit Answer</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6" ng-repeat="n in Multitextbox" ng-hide="is_edit">
+                                        <label class="input">
+                                            <input type="hidden" ng-model="jsonData[$index].question_id" ng-init="jsonData[$index].question_id = question_param_id">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':responsesForm.answer{{$index}}.$invalid &&  responsesForm.$submitted && $index==0, 'no-errors': responsesForm.answer{{$index}}.$valid &&$index==0}"
+                                                ng-model="jsonData[$index].answer" name="answer{{$index}}" placeholder="Answer"
+                                                required="$index==0" autocomplete="off">
+                                        </label>
+
+                                    </section>
+                                </div>
+                                <div class="row" ng-show="is_edit">
+                                    <section class="col-sm-12" style="width: 97%">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                        'has-errors':responsesForm.answer.$invalid && responsesForm.$submitted, 'no-errors': responsesForm.answer.$valid}"
+                                                ng-model="responses.answer" name="answer" placeholder="Answer" required autocomplete="off">
+                                        </label>
+                                        <div class="error-container" ng-show="responsesForm.answer.$error && responsesForm.$submitted" ng-messages="responsesForm.answer.$error">
+                                            <div ng-message="required" class="error">Please Enter Answer</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="error-container" ng-show="responsesForm.answer0.$error && responsesForm.$submitted" ng-messages="responsesForm.answer0.$error">
+                                    <div ng-message="required" class="error">Please Enter at least one answer</div>
+                                </div>
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/responses/{{question_param_id}}" ng-hide="is_edit">
+                                    Cancel
+                                </a>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/responses/{{responses.question_id}}" ng-show="is_edit">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="responsesForm.answer0.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+                                <button type="submit" ng-click="responsesForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+
+
+<style type="text/css">
+    .select2-container-multi .select2-search-choice-close {
+        right: 5px !important;
+        font-size: 15px !important;
+        min-height: 0 !important;
+        margin-top: 3px !important;
+        padding: 1px 0 0 5px !important;
+        color: #000;
+    }
+
+    .select2-container-multi .select2-choices .select2-search-choice {
+        padding: 1px 28px 1px 8px;
+        margin: 4px 0 3px 5px;
+        position: relative;
+        line-height: 18px;
+        color: #000;
+
+    }
+
+    .select2-container-multi .select2-search-choice-close {
+        right: 5px !important;
+        font-size: 15px !important;
+        min-height: 0 !important;
+        margin-top: 3px !important;
+        padding: 1px 0 0 5px !important;
+        color: #000;
+    }
+
+    .select2-search-choice-close:before {
+        color: #000;
+        content: "\f057";
+        position: absolute;
+        right: 0;
+    }
+
+    .select2-container-multi .select2-search-choice-close {
+        left: auto;
+        background: no-repeat;
+        line-height: 13px;
+    }
+</style>

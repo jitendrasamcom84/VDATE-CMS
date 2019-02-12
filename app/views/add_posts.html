@@ -1,0 +1,82 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="postsForm" role="form" ng-submit="postsForm.$valid && postsSubmit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="buttonShow">Add Posts</span>
+                                <span ng-show="buttonShow">Edit Posts</span>
+                            </header>
+                            <fieldset>
+                                 <div class="row">
+                                   
+                                    <section class="col col-md-12">
+                                        <label class="textarea">
+                                            <textarea type="text" ng-class="{
+                                                    'has-errors':postsForm.content.$invalid && postsForm.$submitted, 'no-errors': postsForm.content.$valid}"
+                                                   ng-model="posts.content" name="content" placeholder="Content" required></textarea>
+                                        </label>
+                                        <div class="error-container" ng-show="postsForm.content.$error && postsForm.$submitted" ng-messages="postsForm.content.$error">
+                                            <div ng-message="required" class="error">Please Enter Content!</div>
+                                        </div>
+                                    </section>
+                                    
+                                </div>
+                                <div class="row">
+                                        <section class="col col-6">
+                                                <label class="select">
+        
+                                                 <select name="user_added" ng-class="{
+                                                         'has-errors':postsForm.user_added.$invalid && postsForm.$submitted, 'no-errors': postsForm.user_added.$valid}" ng-model="posts.user_added" ng-options="obj._id as obj.firstname for obj in userinfo" required>
+                                                   <option value="" ng-disabled="true">--Select Member--</option>
+                                                  
+                                                 </select>
+                                                 <i></i>                                
+                                                 </label>
+                                                 <div class="error-container" ng-show="postsForm.user_added.$error &&
+                                                 postsForm.$submitted" ng-messages="postsForm.user_added.$error">
+                                                 <div ng-message="required" class="error">Please Select Member!</div>
+                                                 </div>
+                                         </section>
+                                         <section class="col col-6">
+                                                <label class="select">
+        
+                                                 <select name="thread_id" ng-class="{
+                                                         'has-errors':postsForm.thread_id.$invalid && postsForm.$submitted, 'no-errors': postsForm.thread_id.$valid}" ng-model="posts.thread_id" ng-options="obj._id as obj.subject for obj in threadsinfo" required>
+                                                   <option value="" ng-disabled="true">--Select Threads--</option>
+                                                  
+                                                 </select>
+                                                 <i></i>                                
+                                                 </label>
+                                                 <div class="error-container" ng-show="postsForm.thread_id.$error &&
+                                                 postsForm.$submitted" ng-messages="postsForm.thread_id.$error">
+                                                 <div ng-message="required" class="error">Please Select Threads!</div>
+                                                 </div>
+                                         </section>
+                                    
+                                </div>
+
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/posts">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="postsForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="postsForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+

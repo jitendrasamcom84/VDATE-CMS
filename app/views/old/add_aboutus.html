@@ -1,0 +1,66 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="aboutusForm" role="form" ng-submit="aboutusForm.$valid && aboutusSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span>Add AboutUS</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <!-- <section class="col-sm-12" style="width: 97%">
+                                        <ng-ckeditor ng-model="aboutus.content" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley" name="content" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="aboutusForm.content.$error && aboutusForm.$submitted" ng-messages="aboutusForm.content.$error">
+                                            <div ng-message="required" class="error">Please Add About US!</div>
+                                        </div>
+                                    </section> -->
+                                </div>
+                                <div class="row">
+                                    <!-- <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="aboutus.image" accept="image/*" name="image" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                    ng-required="true">Browse</span>
+                                            <input type="text" ng-model="aboutus.image1" ng-class="{
+                                            'has-errors':aboutusForm.image.$invalid && aboutusForm.$submitted, 'no-errors': aboutusForm.image.$valid}"
+                                                readonly="" placeholder="{{ aboutus.image && aboutus.image ||  'Upload Image' }}">
+                                        </div>
+                                        <div class="error-container" ng-show="aboutusForm.image.$error && aboutusForm.$submitted" ng-messages="aboutusForm.image.$error">
+                                            <div ng-message="required" class="error">Please Select Image!</div>
+                                        </div>
+                                        <br>
+                                        <img ng-src="{{ aboutus.aboutus_image }}" ng-model="aboutus.image" width="200" height="150" style="margin-left:50px">
+                                    </section>0 -->
+                                    <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="aboutus.image" accept="image/*" name="image" type="file" onchange="this.parentNode.nextSibling.value = this.value" ng-required="true" ng-change="change()">Browse</span><input type="text" 
+                                                ng-class="{'has-errors':aboutusForm.image.$invalid && aboutusForm.$submitted, 'no-errors': aboutusForm.image.$valid}" readonly="" placeholder="{{ aboutus.image && aboutus.image ||  'Upload About Pic' }}">
+                                        </div>
+                                        <div class="error-container" ng-show="aboutusForm.image.$error && aboutusForm.$submitted" ng-messages="aboutusForm.image.$error">
+                                        <div ng-message="required" class="error">Please Select Profile Pic!</div>
+                                        </div>
+                                        <br>
+                                    <img ng-src="{{ aboutus.aboutus_image }}" ng-model="aboutus.image" width="200" height="150" style="margin-left:50px">
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancle" ng-href="#/aboutus">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="aboutusForm.$valid && editSubmit()" title="Submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

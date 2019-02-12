@@ -1,0 +1,98 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-bot nopadding">
+        <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+            data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+            <header>
+
+                <h2><strong>Members</strong></h2>
+                <div class="widget-toolbar" role="menu">
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-xs" title="Add Member" ng-href="#/member/add">
+                            Add Member
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div>
+                <div class="text-center" ng-if="loading">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                </div>
+                <div class="widget-body table-responsive">
+                    <table id="" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-responsive table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+
+                                <th>User Name</th>
+                                <!-- <th>Last Name</th> -->
+                                <th>Email ID</th>
+                                <th>Gender</th>
+                                <th>Birth Date</th>
+                                <th>Phone Number</th>
+                                <th>Register Date</th>
+                                <th>Last Login</th>
+                                <th>Subscription</th>
+                                <th>Subscription End Date</th>
+                                <th>Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="u in userinfo" ng-class="{ 'active': u.$edit }">
+
+                                <td data-title="'First Name'" sortable="'firstname'" filter="{ 'firstname': 'text' }">
+                                    <span>{{ u.firstname}}</span>
+                                </td>
+                                <!-- <td data-title="'Last Name'" sortable="'lastname'" filter="{ 'lastname': 'text' }">
+                                    <span>{{ u.lastname}}</span>
+                                </td> -->
+                                <td data-title="'Email'" sortable="'email'" filter="{ 'email': 'email' }">
+                                    <span>{{ u.email}}</span>
+                                </td>
+                                <td data-title="'gender'" sortable="'gender'" filter="{ 'gender': 'text' }">
+                                    <span>{{ u.gender}}</span>
+                                </td>
+                                <td data-title="'date_of_birth'" sortable="'date_of_birth'" filter="{ 'date_of_birth': 'date' }">
+                                    <span>{{ u.birth_date | date: "yyyy/MM/dd"}}</span>
+                                </td>
+                                <td data-title="'phone_number'" sortable="'phone_number'" filter="{ 'phone_number': 'number' }">
+                                    <span>{{ u.phone_number}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'date' }">
+                                    <span>{{ u.create_date | date: "yyyy/MM/dd, hh:mm a"}}</span>
+                                </td>
+                                <td data-title="'last_login'" sortable="'last_login'" filter="{ 'last_login': 'date' }">
+                                    <span>{{ u.last_login | date: "yyyy/MM/dd hh:mm a"}}</span>
+                                </td>
+                                <td data-title="'subscription'" sortable="'subscription'" filter="{ 'subscription': 'text' }">
+                                    <span>{{ u.subscription.packagename}}</span>
+                                </td>
+                                <td data-title="'subscription_date'" sortable="'subscription_date'" filter="{ 'subscription_date': 'date' }">
+                                    <span>{{ u.subscription.last_updated | date: "yyyy/MM/dd"}}</span>
+                                </td>
+                                <td data-title="'active'" sortable="'active'" filter="{ 'active': 'text' }">
+                                    <span>{{ u.active == true?'Yes':'No'}}</span>
+                                </td>
+                                <td data-title="'Actions'">
+                                    <button type="button" id="view" class="btn btn-default" title="View" ng-click="viewMember('/member/View/' + u._id,u._id)"><i
+                                            class="fa fa-eye" aria-hidden="true"></i></button>
+                                    <!-- <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editMember('/member/Edit/' + u._id)"><i
+                                            class="fa fa-edit" aria-hidden="true"></i></button>
+                                    <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(u)"><i
+                                            class="fa fa-trash-o" aria-hidden="true"></i></button> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+<style>
+    td,
+    th {
+        white-space: nowrap;
+    }
+</style>

@@ -1,0 +1,54 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="contactForm" role="form" ng-submit="contactForm.$valid && contactSubmit()"
+                            novalidate enctype="multipart/form-data" autocomplete="off">
+                            <header>
+                                <span ng-hide="buttonShow">Add Headline</span>
+                                <span ng-show="buttonShow">Edit Headline</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-3"></section>
+                                    <section class="col col-6">
+
+                                        <label class="input">
+                                            <input tabindex="1" type="text" ng-class="{
+                                                    'has-errors':contactForm.headline_name.$invalid && contactForm.$submitted, 'no-errors': contactForm.headline_name.$valid}"
+                                                ng-model="contact.headline_name" name="headline_name" placeholder="Headline"
+                                                required="">
+                                        </label>
+                                        <div class="error-container" ng-show="contactForm.headline_name.$error && contactForm.$submitted"
+                                            ng-messages="contactForm.headline_name.$error">
+                                            <div ng-message="required" class="error">Please Enter Headline</div>
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-3"></section>
+
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" tabindex="3" ng-href="#/contactus_headline">
+                                    Cancel
+                                </a>
+                                <button tabindex="2" type="submit" ng-click="contactForm.$valid && submit()" title="Submit"
+                                    class="btn btn-primary" ng-if="is_edit==false" ng-hide="is_edit">
+                                    Submit
+                                </button>
+                                <button type="submit" ng-click="contactForm.$valid && editSubmit()" title="Update"
+                                    ng-if="is_edit==true" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

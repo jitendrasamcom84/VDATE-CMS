@@ -1,0 +1,90 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="questionForm" role="form" ng-submit="questionForm.$valid && questionSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Question</span>
+                                <span ng-show="is_edit">Edit Question</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                        'has-errors':questionForm.question.$invalid && questionForm.$submitted, 'no-errors': questionForm.question.$valid}"
+                                                ng-model="questions.question" name="question" placeholder="Question" ng-required="true"
+                                                autocomplete="off">
+                                        </label>
+                                        <div class="error-container" ng-show="questionForm.question.$error && questionForm.$submitted" ng-messages="questionForm.question.$error">
+                                            <div ng-message="required" class="error">Please Enter Question</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="select">
+                                            <select name="answer_type" ng-class="{
+                                                    'has-errors':questionForm.answer_type.$invalid && questionForm.$submitted, 'no-errors': questionForm.answer_type.$valid}"
+                                                ng-model="questions.answer_type" required>
+                                                <option value="" ng-disabled="true">--Select Answer Type--</option>
+                                                <option value="text">Text</option>
+                                                <option value="radio">Radio</option>
+                                                <option value="checkbox">Checkbox</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                        <div class="error-container" ng-show="questionForm.answer_type.$error && questionForm.$submitted" ng-messages="questionForm.answer_type.$error">
+                                            <div ng-message="required" class="error">Please Enter Answer Type</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" class="allownumericwithdecimal" maxlength="2" ng-class="{
+                                                            'has-errors':questionForm.optionvalue.$invalid && questionForm.$submitted, 'no-errors': questionForm.optionvalue.$valid}"
+                                                ng-model="questions.optionvalue" name="optionvalue" placeholder="Optionvalue"
+                                                ng-required="true" autocomplete="off">
+                                        </label>
+                                        <div class="error-container" ng-show="questionForm.optionvalue.$error && questionForm.$submitted" ng-messages="questionForm.optionvalue.$error">
+                                            <div ng-message="required" class="error">Please Enter Option Value</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" class="allownumeric" ng-model="questions.limit" name="limit" placeholder="Limit Answer" autocomplete="off" maxlength="2">
+                                        </label>
+                                        <div ng-if="questions.limit > questions.optionvalue" class="error">Maximum limit is {{questions.optionvalue}}</div>
+                                        <div ng-if="questions.limit == '' || questions.limit == '0' " class="error">Please Enter at least 1 limit of answer</div>
+                                        <!-- <div class="error-container" ng-show="questionForm.limit.$error && questionForm.$submitted" ng-messages="questionForm.limit.$error">
+                                            <div ng-message="required" class="error">Please Enter Limit of Answer</div>
+                                        </div>
+                                        -->
+                                    </section>
+                                </div>
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/question_queue/{{sub_id}}" ng-hide="is_edit">
+                                    Cancel
+                                </a>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/question_queue/{{questions.subcat_name._id}}" ng-show="is_edit">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="questionForm.$valid && AddQuestion()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="questionForm.$valid && UpdateQuestion()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

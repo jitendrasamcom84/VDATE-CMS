@@ -1,0 +1,65 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="videosForm" role="form" ng-submit="videosForm.$valid && videosSubmit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Videos</span>
+                                <span ng-show="is_edit">Edit Videos</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':videosForm.headline.$invalid && videosForm.$submitted, 'no-errors': videosForm.headline.$valid}"
+                                                   ng-model="videos.headline" name="headline" placeholder="Headline" ng-required="true">
+                                        </label>
+                                        <div class="error-container" ng-show="videosForm.headline.$error && videosForm.$submitted" ng-messages="videosForm.headline.$error">
+                                           <div ng-message="required" class="error">Please Enter Headline!</div>
+                                        </div>
+                                    </section>
+                                 
+                                    <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="videos.content" accept="video/*" name="upload" type="file" onchange="this.parentNode.nextSibling.value = this.value" ng-required="true">Browse</span><input type="text" ng-class="{'has-errors':videosForm.upload.$invalid && videosForm.$submitted, 'no-errors': videosForm.upload.$valid}" readonly=""  placeholder="{{ videos.content && videos.content || 'Upload Video' }}">
+                                        </div>
+                                        <div class="error-container" ng-show="videosForm.upload.$error && videosForm.$submitted" ng-messages="videosForm.upload.$error">
+                                        <div ng-message="required" class="error">Please Select Video!</div>
+                                        </div>
+                                        <br>
+                                        <video ng-show="is_edit" ng-if="videos.content" width="400" controls>
+                                                    <source src="{{ videos.content }}">
+
+                                        </video>
+                                    </section>
+                                
+                                
+                                </div>
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancle" ng-href="#/videos">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="videosForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="videosForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+
+                            </footer>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

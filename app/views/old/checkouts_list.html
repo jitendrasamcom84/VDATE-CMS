@@ -1,0 +1,81 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+        <div class="jarviswidget" id="checkin_checkout" 
+             data-widget-editbutton="false"
+             data-widget-togglebutton="false"
+             data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false"
+             data-widget-custombutton="true">
+            <header>
+                <h2><strong>Checkouts</strong></h2>
+                <div class="widget-toolbar" role="menu">
+                    
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body table-responsive">
+                    <table id="tblCheckoutsData"  dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                
+                                <th>Member Name</th>
+                                <th>Checkout ID</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Credit Card Number</th>
+                                <th>Card Holder</th>
+                                <th>Card Holder ID</th>
+                                <th>Card Type</th>
+                                <th>Expiry Date</th>
+                                <th>Direct Debit</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ck in checkoutsinfo"  ng-class="{ 'active': ck.$edit }">
+                            
+                               
+                                <td data-title="'Member Name'" sortable="'user_name'" filter="{ 'user_name': 'text' }">
+                                    <span>{{ ck.user_name.firstname}}</span>
+                                </td>
+                                <td data-title="'c_id'" sortable="'c_id'" filter="{ 'c_id': 'text' }">
+                                    <span>{{ ck.c_id}}</span>
+                                </td>
+                                <td data-title="'Email'" sortable="'c_email'" filter="{ 'c_email': 'email' }">
+                                    <span>{{ ck.c_email.email}}</span>
+                                </td>
+                                <td data-title="'Phone Number'" sortable="'phone_num'" filter="{ 'phone_num': 'number' }">
+                                    <span>{{ ck.phone_num}}</span>
+                                </td>
+                                <td data-title="'Credit Card Number'" sortable="'creditcardnumber'" filter="{ 'creditcardnumber': 'number' }">
+                                    <span>{{ ck.creditcardnumber}}</span>
+                                </td>
+                                <td data-title="'Card Holder'" sortable="'cardholder'" filter="{ 'cardholder': 'text' }">
+                                    <span>{{ ck.cardholder}}</span>
+                                </td>
+                                <td data-title="'Card Holder ID'" sortable="'cholderid'" filter="{ 'cholderid': 'text' }">
+                                    <span>{{ ck.cholderid}}</span>
+                                </td>
+                                <td data-title="'Card Type'" sortable="'cardtype'" filter="{ 'cardtype': 'text' }">
+                                    <span>{{ ck.cardtype}}</span>
+                                </td>
+                                <td data-title="'Expiry Date'" sortable="'expiry_year'" filter="{ 'expiry_year': 'date' }">
+                                    <span>{{ ck.expiry_year | date: "yyyy"}}/{{ ck.expiry_month | date:"MM"}}/{{ ck.expiry_day | date:"dd"}}</span>
+                                </td>
+                                
+                                <td data-title="'Direct Debit'" sortable="'direct_debit'" filter="{ 'direct_debit': 'text' }">
+                                    <span>{{ ck.direct_debit == true?'Yes':'No' }}</span>
+                                </td>
+                                <td data-title="'Actions'">
+                                   <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(ck)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

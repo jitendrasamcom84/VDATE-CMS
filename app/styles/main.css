@@ -1,0 +1,267 @@
+/*.uiselect_multiple .ui-select .ui-select-match {
+  width: 100% !important;
+}
+.uiselect_multiple .ui-select-search{
+  height: 27px !important;
+}
+.uiselect_multiple .ui-select-container{
+  padding: 0px !important;
+  height: 30px !important;
+}*/
+
+/*For pagination*/
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    border: 0px !important;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+.fullwidth{
+    width:100% !important;
+}
+.nomargin{
+    margin: 0px !important;
+}
+.nopadding{
+    padding: 0px !important;
+}
+.bg_transparent{
+    background-image: none !important;
+    background-color: transparent !important;
+}
+.border_right_none{
+    border-right: 0px !important;
+}
+.deck_edit .select2-search-choice{
+    padding: 2px !important;
+    margin: 1px !important;
+    width: 100% !important;
+}
+/* Overrides for better */
+
+.dataTables_filter .input-group-addon
+{
+    width: 30px !important;
+    height: 30px !important;
+}
+.input-group-addon
+{
+    font-size: 12px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {padding:0px !important;}
+
+div.dataTables_wrapper div.dataTables_filter input { margin-left: 0px !important; }
+
+.product-images { list-style: none; list-style-type: none; padding: 0px; margin: 0px; }
+.product-images li { display: inline-block; padding: 10px;  }
+.product-images li img { max-width: 105px; height: auto; cursor: move; margin-bottom: 5px; }
+
+/* Throbber CSS **********************************************  */
+.spinner {
+    width: 20px;
+    height: 20px;
+    background-color: #3F33FF;
+
+    /*  margin: 100px auto;*/
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+    0% { 
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+    } 50% { 
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+    } 100% { 
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}
+/* Throber CSS ENDS ***************************************** */
+
+/* Validation Error CSS */
+
+.error-container {
+    margin: 5px 0;
+}
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+/*.form-control{
+    border: 1px solid #ccc !important;
+}*/
+
+.error {
+    /* padding: 10px 16px;*/
+    font-size: 13px;
+    text-transform: capitalize;
+    color: #B83E2C !important;
+    vertical-align: middle;
+    font-weight:normal;
+}
+
+.error i {
+    font-size: 24px;
+    color: #B83E2C;  
+    vertical-align: middle;
+}
+
+.last-error-container > .error {
+    padding: 10px 16px 0;
+}
+
+.has-errors {
+    border-bottom: 2px solid #B83E2C !important;
+}
+
+.no-errors {
+    border-bottom: 2px solid green !important;
+}
+.img_events
+{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+.job_title{
+    margin:0px !important;
+}
+.img_workspace {
+    width: 90%;
+    /* height: 200px; */
+}
+
+.boxshadow_well{
+    /*background-color: #eed !important;*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.6) !important;   
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6) !important;
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6) !important;
+    -o-box-shadow: 0 0 10px rgba(0,0,0,0.6) !important;
+}
+.big_text_label{
+    white-space: inherit;
+}
+.dashboard_income_text{
+    font-size: 40px;
+}
+.income_box_icons{
+    font-size: 80px;
+}
+.block-ui-message {
+    background-image: url("../img/loading1.gif");
+    background-repeat: no-repeat;
+    font-size: 0px;
+    padding: 38px;
+    background-color: transparent;
+}
+.block-ui-active > .block-ui-container {    
+    cursor: default;
+}
+table td{
+    word-break: break-all !important;
+}
+.nopadding{
+    padding: 0 !important;
+}
+.padding-10{
+    padding: 10px !important;
+}
+/* Validation Error Ends  */
+.tab_contributor{
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    height: 166px !important;
+}
+.text_black{
+    color: #000;
+}
+.text_666{
+    color: #666;
+}
+.bold{
+    font-weight: bold;
+}
+.custom_scroll {
+    overflow-x: auto;   
+}
+
+/* Custome CSS Icon set */
+.img_iconSet{
+    height: 46px;
+    width: 37px !important;
+    margin: 1px;
+}
+
+.margin-top-10{
+	margin-top: 10px !important;
+}
+.margin-bottom-20{
+    margin-bottom: 20px !important;
+}
+.margin-bottom-40{
+    margin-bottom: 40px !important;
+}
+/* .select2-container-multi .select2-search-choice-close {
+    left: -12% !important;
+    min-height: 0px !important;
+    padding-top: 1px !important;
+    padding-right: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 5px !important;
+    margin-top: 3px !important;
+} */
+
+
+/*changes*/
+.radio_admin{float: left;  width:auto !important; margin-right:8px !important;}
+.radio_label {float: left;}
+.full_div {width: 100%; float: left; margin: 6px 0 0px 0;}
+.height_15 { height: 15px !important;}
+.fix_width_radio {margin-right: 25px; float: left;}
+
+
+
+@media screen and (max-width: 600px){
+    .smart-form .col{float: left;}
+}
+
+table td {
+    word-break: inherit !important;
+    /* white-space: nowrap; */
+    min-width: 140px;
+}
+
+  .dataTables_wrapper{width:auto; display: inline-block; min-width: 100% !important;}
+  .dt-toolbar-footer {
+    width: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+
+
+.not_open_sub_menu .collapse-sign {
+    display: none;
+  }
+  
+  .not_open_sub_menu ul {
+    display: none !important;
+  }
+
+  textarea.push-message.ng-pristine.ng-untouched.ng-empty.ng-invalid.ng-invalid-required {padding: 6px;}
+  .input-group.date.push_details {position: relative;}
+  .push_detail_calendar {position: absolute; top: 0; right: 2px;}

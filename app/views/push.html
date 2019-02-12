@@ -1,0 +1,65 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-bot nopadding" style="margin-bottom: 40px">
+        <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+            <header>
+                <h2>
+                    <strong>Push</strong>
+                </h2>
+                <div class="widget-toolbar" role="menu">
+                    <div class="btn-group">
+                        <a class="add btn btn-default btn-xs" title="Add" ng-href="#/push/add">
+                            Add
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div>
+                <div class="text-center" ng-if="loading">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                </div>
+                <div class="widget-body table-responsive">
+                        <table id="" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th>Content</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Number of users</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ps in pushinfo" ng-class="{ 'active': ps.$edit }">
+
+                                <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                                    <span>{{ ps.message}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'text' }">
+                                    <span>{{ ps.create_date | date: "dd/MM/yyyy"}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'text' }">
+                                    <span>{{ ps.create_date | date: "hh:mm a"}}</span>
+                                </td>
+                                <td data-title="'no_of_user'" sortable="'no_of_user'" filter="{ 'no_of_user': 'text' }">
+                                    <span>{{ps.num_of_user}}</span>
+                                </td>
+
+                                <!-- <td data-title="'Actions'">
+                                    <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editPackages('/packages/Edit/' + p._id)">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(p)">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

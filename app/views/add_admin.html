@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="order form-border">
+      <form class="order-form" class="smart-form form-horizontal" method="POST" name="adminForm" role="form" ng-submit="adminForm.$valid && adminSubmit()"
+        novalidate enctype="multipart/form-data">
+        <header>
+          <span class="add-order legend-title" ng-hide="buttonShow">Add Admin</span>
+          <span class="add-order legend-title" ng-show="buttonShow">Edit Admin</span>
+          <a class="add btn btn-default btn-sm pull-right" title="Add" ng-href="#/admin_list">
+              Back
+          </a>
+        </header>
+        <fieldset class="main-set">
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">User Name</label>
+              <input type="text" class="form-control" tabindex="1" ng-class="{
+                  'has-errors':adminForm.firstname.$invalid && adminForm.$submitted, 'no-errors': adminForm.firstname.$valid}"
+                ng-model="admin.firstname" name="firstname" placeholder="Fullname" required="" autocomplete="off">
+              <div class="error-container" ng-show="adminForm.firstname.$error && adminForm.$submitted" ng-messages="adminForm.firstname.$error">
+                <div ng-message="required" class="error">Please Enter Full Name</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Email</label>
+              <input type="email" class="form-control" tabindex="2" ng-class="{
+                  'has-errors':adminForm.email.$invalid && adminForm.$submitted, 'no-errors': adminForm.email.$valid}" ng-model="admin.email" ng-disabled="is_edit"  ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+                name="email" placeholder="Email" required="" autocomplete="off">
+              <div class="error-container" ng-show="adminForm.email.$error && adminForm.$submitted" ng-messages="adminForm.email.$error">
+                <div ng-message="required" class="error">Please Enter Email Address</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12" ng-if="buttonShow==false">
+              <label class="">Password</label>
+              <input type="password" class="form-control" tabindex="2" ng-class="{
+                  'has-errors':adminForm.password.$invalid && adminForm.$submitted, 'no-errors': adminForm.password.$valid}" ng-model="admin.password" ng-disabled="is_edit"
+                name="password" placeholder="Password" required="" autocomplete="off">
+                <div class="error-container" ng-show="adminForm.password.$error && adminForm.$submitted" ng-messages="adminForm.password.$error">
+                  <div ng-message="required" class="error">Please Enter Password</div>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <!-- <input type="submit" class="btn btn-default" value="Save" tabindex="4"> -->
+              <button type="submit" class="btn btn-default" tabindex="4" ng-click="adminForm.$valid && submit()" title="Save" class="btn btn-primary" ng-hide="is_edit">
+                Save
+            </button>
+            <button type="submit" ng-click="adminForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-default" tabindex="4">
+              Update
+          </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

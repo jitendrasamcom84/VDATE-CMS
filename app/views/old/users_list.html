@@ -1,0 +1,70 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+        <div class="jarviswidget" id="checkin_checkout" 
+             data-widget-editbutton="false"
+             data-widget-togglebutton="false"
+             data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false"
+             data-widget-custombutton="true">
+            <header>
+                <h2><strong>Users</strong></h2>
+                <div class="widget-toolbar" role="menu">
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-xs" ng-href="#/user/add">
+                            Add User
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body table-responsive">
+                    <table id="tblUsersData"  dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email ID</th>
+                                <th>Phone No.</th>
+                                <th>Birth Date</th>
+                                <th>Register Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="u in userinfo"  ng-class="{ 'active': u.$edit }">
+                                <td>
+                                    <img ng-show="u.avatar != ''" src="{{ apiendpoint.BaseUrl + 'image/get/' + u.avatar}}"
+                                         style="min-height: 40px; min-width: 40px; max-height: 50px; max-width: 50px">
+                                    <img ng-show="u.avatar == ''" src="../img/no_image.png"
+                                         style="min-height: 40px; min-width: 40px; max-height: 50px; max-width: 50px">
+                                </td>
+                                <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                                    <span>{{ u.full_name}}</span>
+                                </td>
+                                <td data-title="'Email'" sortable="'email'" filter="{ 'name': 'text' }">
+                                    <span >{{ u.email}}</span>
+                                </td>
+                                <td data-title="'phone_number'" sortable="'phone_number'" filter="{ 'phone_number': 'number' }">
+                                    <span >{{ u.phone_number}}</span>
+                                </td>
+                                <td data-title="'date_of_birth'" sortable="'date_of_birth'" filter="{ 'date_of_birth': 'text' }">
+                                    <span >{{ u.date_of_birth | date: "MMM d, y"}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'text' }">
+                                    <span >{{ u.create_date | date: "MMM d, y h:mm a"}}</span>
+                                </td>
+                                <td data-title="'Actions'">
+                                    <button title="Click to active" type="button" class="btn btn-default" ng-show="u.is_locked" ng-click="deActiveUser(u)"><i class="fa fa-lock"></i></button>
+                                    <button title="Click to deactive" type="button" class="btn btn-default" ng-hide="u.is_locked" ng-click="deActiveUser(u)"><i class="fa fa-unlock"></i></button>
+                                    <button type="button" id="delete" class="btn btn-default" ng-click="deleteUser(u)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

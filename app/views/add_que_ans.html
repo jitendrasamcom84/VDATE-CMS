@@ -1,0 +1,92 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="QAForm" role="form" ng-submit="QAForm.$valid && QASubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <div class="row space">
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <span>Questions & Answers</span>
+                                    </div>
+                                    <div ng-show="is_edit == true">
+                                        <div class="col col-md-3 col-sm-3 col-xs-6">
+                                            <span class="about-date">{{last_updated | date : "dd/MM/yyyy"}}</span>
+                                        </div>
+                                        <div class="col col-md-3 col-sm-3 col-xs-6">
+                                            <span class="user-update">{{user}}</span>
+                                        </div>
+                                        <div class="col col-md-1 col-sm-1 col-xs-6">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable()">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-12" style="width: 97%" ng-hide="is_edit">
+                                        <h4 style="margin-bottom:10px"><b>Question</b></h4>
+                                        <ng-ckeditor ng-model="questions" skin="moono" remove-buttons="Image" ng-change="removeSpace()"
+                                            remove-plugins="iframe,flash,smiley" name="question" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="QAForm.question.$error && QAForm.$submitted"
+                                            ng-messages="QAForm.question.$error">
+                                            <div ng-message="required" class="error">Please Enter Question</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-12" style="width: 97%" ng-show="is_edit">
+                                        <ng-ckeditor ng-disabled="edit==false" ng-model="questions" skin="moono"
+                                            remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                            name="question" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="QAForm.question.$error && QAForm.$submitted"
+                                            ng-messages="QAForm.question.$error">
+                                            <div ng-message="required" class="error">Please Enter Question</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-12" style="width: 97%" ng-hide="is_edit">
+                                        <h4 style="margin-bottom:10px"><b>Answer</b></h4>
+                                        <ng-ckeditor ng-model="answer" skin="moono" remove-buttons="Image" ng-change="removeSpace()"
+                                            remove-plugins="iframe,flash,smiley" name="answer" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="QAForm.answer.$error && QAForm.$submitted"
+                                            ng-messages="QAForm.answer.$error">
+                                            <div ng-message="required" class="error">Please Enter Answer</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-12" style="width: 97%" ng-show="is_edit">
+                                        <ng-ckeditor ng-disabled="edit==false" ng-model="answer" skin="moono"
+                                            remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                            name="answer" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="QAForm.answer.$error && QAForm.$submitted"
+                                            ng-messages="QAForm.answer.$error">
+                                            <div ng-message="required" class="error">Please Enter Answer </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/que_ans_list">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="QAForm.$valid && submit()" title="Submit" class="btn btn-primary"
+                                    ng-hide="is_edit">
+                                    Save
+                                </button>
+                                <button type="submit" ng-click="QAForm.$valid && editSubmit()" title="Submit" class="btn btn-primary"
+                                    ng-show="is_edit">
+                                    Update
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

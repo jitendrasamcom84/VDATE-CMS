@@ -1,0 +1,50 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="subcategoryForm" role="form" ng-submit="subcategoryForm.$valid && subcategorySubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Subcategory</span>
+                                <span ng-show="is_edit">Edit Subcategory</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 97%">
+
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':subcategoryForm.subcat_name.$invalid && subcategoryForm.$submitted, 'no-errors': subcategoryForm.subcat_name.$valid}"
+                                                ng-model="subcategory.subcat_name" name="subcat_name" placeholder="Subcategory Name"
+                                                ng-required="true" autocomplete="off">
+                                        </label>
+                                        <div class="error-container" ng-show="subcategoryForm.subcat_name.$error && subcategoryForm.$submitted" ng-messages="subcategoryForm.subcat_name.$error">
+                                            <div ng-message="required" class="error">Please Enter Subcategory Name</div>
+                                        </div>
+                                    </section>
+
+                                </div>
+
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-click="GoToQuestionnarie()">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="subcategoryForm.$valid && AddSubcategory()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="subcategoryForm.$valid && UpdateSubcategory()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

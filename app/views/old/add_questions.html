@@ -1,0 +1,107 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="questionsForm" role="form" ng-submit="questionsForm.$valid && questionsSubmit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Questions</span>
+                                <span ng-show="is_edit">Edit Questions</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-md-6">
+                  
+                                        <label class="select">
+
+                                            <select name="ques_cat" ng-class="{
+                                                'has-errors':questionsForm.ques_cat.$invalid && questionsForm.$submitted, 'no-errors': questionsForm.ques_cat.$valid}" 
+                                                ng-model="questions.ques_cat" ng-options="obj._id as obj.name for obj in ques_catinfo" required>
+                                              <option value="" ng-disabled="true">--Select Question Category--</option>
+                                             
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                        <div class="error-container" ng-show="questionsForm.ques_cat.$error && questionsForm.$submitted" ng-messages="questionsForm.ques_cat.$error">
+                                           <div ng-message="required" class="error">Please Select Question Category!</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-md-6">
+                                        
+                                        <label class="textarea">
+                                            <textarea type="text" ng-class="{
+                                                    'has-errors':questionsForm.questions.$invalid && questionsForm.$submitted, 'no-errors': questionsForm.questions.$valid}"
+                                                   ng-model="questions.question" name="questions" placeholder="Questions" ng-required="true"></textarea>
+                                        </label>
+                                        <div class="error-container" ng-show="questionsForm.questions.$error && questionsForm.$submitted" ng-messages="questionsForm.questions.$error">
+                                           <div ng-message="required" class="error">Please Enter Questions!</div>
+                                        </div>
+                                    </section>
+                                  
+                                  
+                                </div>
+                                <!-- <div class="row">
+                                    <section class="col col-3">
+                                        <label class=""><b>Survey :</b>
+                                           <input type="radio" name="issurvey" ng-model="questions.issurvey" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="issurvey" ng-model="questions.issurvey" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="questionsForm.issurvey.$error && questionsForm.$submitted" ng-messages="questionsForm.issurvey.$error">
+                                        <div ng-message="required" class="error">Please Select Survey!</div>
+                                        </div>
+                                    </section>
+                                     <section class="col col-3">
+                                        <label class=""><b>Range :</b>
+                                           <input type="radio" name="isrange" ng-model="questions.isrange" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="isrange" ng-model="questions.isrange" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="questionsForm.isrange.$error && questionsForm.$submitted" ng-messages="questionsForm.isrange.$error">
+                                        <div ng-message="required" class="error">Please Select Range!</div>
+                                        </div>
+                                    </section>
+                                 <section class="col col-3">
+                                        <label class=""><b>Open Question :</b>
+                                           <input type="radio" name="isopenquestion" ng-model="questions.isopenquestion" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="isopenquestion" ng-model="questions.isopenquestion" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="questionsForm.isopenquestion.$error && questionsForm.$submitted" ng-messages="questionsForm.isopenquestion.$error">
+                                        <div ng-message="required" class="error">Please Select Open Question!</div>
+                                        </div>
+                                    </section>
+                                     <section class="col col-3">
+                                        <label class=""><b>Multi Choice :</b>
+                                           <input type="radio" name="ismulty_choice" ng-model="questions.ismulty_choice" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="ismulty_choice" ng-model="questions.ismulty_choice" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="questionsForm.ismulty_choice.$error && questionsForm.$submitted" ng-messages="questionsForm.ismulty_choice.$error">
+                                        <div ng-message="required" class="error">Please Select Multi Choice!</div>
+                                        </div>
+                                    </section>
+                                    
+                                </div> -->
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancle" ng-href="#/questions">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="questionsForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="questionsForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

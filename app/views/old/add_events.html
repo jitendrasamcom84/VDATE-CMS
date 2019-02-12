@@ -1,0 +1,174 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="eventsForm" role="form" ng-submit="eventsForm.$valid && eventsSubmit()" novalidate enctype="multipart/form-data" id="eventForm">
+                            <header>
+                                <span ng-hide="is_edit">Add Event</span>
+                                <span ng-show="is_edit">Edit Event</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                   
+                                    <section class="col col-6">
+                                           <label class="select">
+
+                                            <select name="user_id" ng-class="{
+                                                    'has-errors':eventsForm.user_id.$invalid && eventsForm.$submitted, 'no-errors': eventsForm.user_id.$valid}" ng-model="events.user_id" ng-options="obj._id as obj.firstname for obj in userinfo" required>
+                                              <option value="" ng-disabled="true">--Select Member--</option>
+                                             
+                                            </select>
+                                            <i></i>                                
+                                            </label>
+                                            <div class="error-container" ng-show="eventsForm.user_id.$error &&
+                                            eventsForm.$submitted" ng-messages="eventsForm.user_id.$error">
+                                            <div ng-message="required" class="error">Please Select Member!</div>
+                                            </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                          <input type="text" ng-class="{'has-
+                                            errors':eventsForm.eventname.$invalid && eventsForm.$submitted, 'no-errors':
+                                            eventsForm.eventname.$valid}"
+                                            ng-model="events.eventname" name="eventname" placeholder="Event Name"
+                                            required>                                         </label>
+                                            <div class="error-container" ng-show="eventsForm.eventname.$error &&
+                                            eventsForm.$submitted" ng-messages="eventsForm.eventname.$error">
+                                            <div ng-message="required" class="error">Please Enter Event Name!</div>
+                                        </div>
+
+                                    </div> 
+                                    <div class="row"> 
+                                    <section class="col col-6">
+                                        <label class="input"> 
+                                            <div class="input-group date">
+                                                <input class="form-control"
+                                                 placeholder="Select Event Date & Time"
+                                                 moment-picker="eventsForm.eventdatetime.stringDate"
+                                                 locale="en"
+                                                 name="eventdatetime"
+                                                 format="YYYY-MM-DD HH:mm"
+                                                 start-view="month"
+                                                 min-date="minDateString"
+                                                 required="true"
+                                                 validate="false"
+                                                 ng-model="events.eventdatetime"
+                                                 readonly
+                                                 ng-class="{
+                                                 'has-errors':eventsForm.eventdatetime.$invalid && eventsForm.$submitted, 'no-errors': eventsForm.eventdatetime.$valid}">
+                                                 <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                               </div>     
+                                        </label>
+                                        <div class="error-container" ng-show="eventsForm.eventdatetime.$error && eventsForm.$submitted" ng-messages="eventsForm.eventdatetime.$error">
+                                            <div ng-message="required" class="error">Please Select Event Date & Time!</div>
+                                        </div>
+                                    </section>
+                                     <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':eventsForm.location.$invalid && eventsForm.$submitted, 'no-errors': eventsForm.location.$valid}" 
+                                                   ng-model="events.location" name="location" placeholder="Location" required>
+                                        </label>
+                                        <div class="error-container" ng-show="eventsForm.location.$error && eventsForm.$submitted" ng-messages="eventsForm.location.$error">
+                                            <div ng-message="required" class="error">Please Enter Location!</div>
+                                        </div>
+                                    </section>
+                                    </div> 
+                                    <div class="row"> 
+                                   
+                                    <section class="col col-6">
+                                           <label class="select">
+
+                                            <select multiple ui-select2 name="withuser" style="width:100% !important" ng-class="{
+                                                    'has-errors':eventsForm.withuser.$invalid && eventsForm.$submitted, 'no-errors': eventsForm.withuser.$valid}" ng-model="events.withuser" placeholder="Select With Member" required>
+                                              <option value="" ng-disabled="true">--Select With Member--</option>
+                                              <option ng-repeat="obj in userinfo" value="{{obj._id}}" >{{obj.firstname}}</option>
+                                            </select>
+                                             <i></i>
+                                              </label>
+                                              
+                                        <div class="error-container" ng-show="eventsForm.withuser.$error && eventsForm.$submitted" ng-messages="eventsForm.withuser.$error">
+                                           <div ng-message="required" class="error">Please Select With Member!</div>
+                                        </div>
+                                    </section>
+                                      <section class="col col-6">
+                                        <label class="textarea">
+                                            <textarea type="text" ng-class="{
+                                                    'has-errors':eventsForm.notes.$invalid && eventsForm.$submitted, 'no-errors': eventsForm.notes.$valid}"
+                                                   ng-model="events.notes" name="notes" placeholder="Notes" required></textarea>
+                                        </label>
+                                        <div class="error-container" ng-show="eventsForm.notes.$error && eventsForm.$submitted" ng-messages="eventsForm.notes.$error">
+                                            <div ng-message="required" class="error">Please Enter Notes!</div>
+                                        </div>
+                                    </section> 
+                                </div>
+                                <div class="row">
+                                                                      
+                                    <section class="col col-6">
+                                        <label class=""><b>Happened :</b>
+                                           <input type="radio" name="ishappened" ng-model="events.ishappened" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="ishappened" ng-model="events.ishappened" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="eventsForm.ishappened.$error && eventsForm.$submitted" ng-messages="eventsForm.ishappened.$error">
+                                        <div ng-message="required" class="error">Please Select IsHappened!</div>
+                                        </div>
+                                    </section> 
+                                    
+                                </div>
+                                
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancle" ng-href="#/events">
+                                    Cancel
+                                </a>
+                                <button type="submit" title="Submit" ng-click="eventsForm.$valid && submit()" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" title="Update" ng-click="eventsForm.$valid && editSubmit()" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<style type="text/css">
+
+.select2-container-multi .select2-search-choice-close {
+            right: 5px !important;
+            font-size: 15px !important;
+            min-height: 0!important;
+            margin-top: 3px!important;
+            padding: 1px 0 0 5px!important;
+            color: #000;
+        }
+        
+        .select2-container-multi .select2-choices .select2-search-choice {
+            padding: 1px 28px 1px 8px;
+            margin: 4px 0 3px 5px;
+            position: relative;
+            line-height: 18px;
+            color: #000;
+            
+        }
+        
+        .select2-container-multi .select2-search-choice-close { right: 5px !important; font-size: 15px !important; min-height: 0!important; margin-top: 3px!important; padding: 1px 0 0 5px!important; color: #000; }
+        
+        .select2-search-choice-close:before { color: #000; content: "\f057"; position: absolute; right: 0; }
+        .select2-container-multi .select2-search-choice-close {
+            left: auto;
+            background: no-repeat;
+            line-height: 13px;
+        }
+</style>

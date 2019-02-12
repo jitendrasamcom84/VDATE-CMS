@@ -1,0 +1,78 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="contetnForm" role="form" ng-submit="v.$valid && contentSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span class="add-order legend-title" ng-hide="buttonShow">Footer Content</span>
+                            </header>
+                            
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 95%">
+                                        <label class="">Phone</label>
+                                        
+
+                                        <input style="height: 25px !important" ng-class="{
+                                            'has-errors':contetnForm.phone.$invalid && contetnForm.$submitted, 'no-errors': contetnForm.phone.$valid}"
+                                                type="text" class='form-control allownumericwithdecimal' ng-model="content.phone"
+                                                name="phone" placeholder="Phone Number" minlength="6" maxlength="15"
+                                                required="">
+
+                                        <!-- <input type="text" class="form-control" tabindex="1" ng-class="{
+                                          'has-errors':contetnForm.phone.$invalid && adminForm.$submitted, 'no-errors': contetnForm.phone.$valid}"
+                                        ng-model="content.phone" name="phone" placeholder="Phone" required="" autocomplete="off"> -->
+                                        <div class="error-container" ng-show="contetnForm.phone.$error && contetnForm.$submitted"
+                                            ng-messages="contetnForm.phone.$error">
+                                            <div ng-message="required" class="error">Please Enter Phone Number</div>
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                        <!-- <div class="error-container" ng-show="contetnForm.phone.$error && contetnForm.$submitted"
+                                            ng-messages="contetnForm.phone.$error">
+                                            <div ng-message="required" class="error">Please Enter Phone Number</div>
+                                        </div> -->
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 95%">
+                                        <label class="">Email</label>
+                                        
+                                        <input style="height: 25px !important" type="email" class="form-control"  ng-class="{
+                                                    'has-errors':contetnForm.email.$invalid && contetnForm.$submitted, 'no-errors': contetnForm.email.$valid}"
+                                                ng-model="content.email" ng-disabled="is_edit" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+                                                name="email" placeholder="Email" required>
+
+                                        <!-- <input type="text" class="form-control" tabindex="1" ng-class="{
+                                          'has-errors':contetnForm.email.$invalid && adminForm.$submitted, 'no-errors': contetnForm.email.$valid}"
+                                        ng-model="content.email" name="email" placeholder="Email" required="" autocomplete="off"> -->
+                                        <div class="error-container" ng-show="contetnForm.email.$error && contetnForm.$submitted"
+                                            ng-messages="contetnForm.email.$error">
+                                            <span class="error" ng-show="contetnForm.email.$error.required">Please Enter
+                                                Email Address
+                                            </span>
+                                            <span class="error" ng-show="contetnForm.email.$dirty&&contetnForm.email.$error.pattern">Please
+                                                Enter Valid Email Address</span>
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <!-- <a type="button" class="btn btn-danger" title="Cancel" ng-click="contentClear()">
+                                    Clear
+                                </a> -->
+                                <button type="submit" ng-click="contetnForm.$valid && editSubmit(1)" title="Submit"
+                                    class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

@@ -1,0 +1,65 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="termsconditionForm" role="form" ng-submit="termsconditionForm.$valid && termsconditionSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <div class="row space">
+                                    <div class="col col-md-3 col-sm-3 col-xs-6">
+                                        <span>Terms & Condition</span>        
+                                    </div>
+                                    <div class="col col-md-3 col-sm-3 col-xs-6">
+                                        <span class="about-date">{{termscondition.last_updated | date : "dd/MM/yyyy"}}</span>
+                                    </div>
+                                    <div class="col col-md-3 col-sm-3 col-xs-6">
+                                        <span class="user-update">{{termscondition.user.firstname}}</span>
+                                    </div>
+                                    <div class="col col-md-1 col-sm-1 col-xs-6">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit" ng-click="editable()">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>        
+                                    </div>
+                                </div>
+                            </header>
+                            <fieldset>
+                                <!-- <div class="row">
+                                    <section class="col col-12" style="width: 97%">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                                'has-errors':termsconditionForm.title.$invalid && termsconditionForm.$submitted, 'no-errors': termsconditionForm.title.$valid}"
+                                                ng-model="termscondition.title" name="title" placeholder="Title" required>
+                                        </label>
+                                        <div class="error-container" ng-show="termsconditionForm.title.$error && termsconditionForm.$submitted" ng-messages="termsconditionForm.title.$error">
+                                                <div ng-message="required" class="error">Please Enter Title !</div>
+                                        </div>
+                                    </section>
+                                </div> -->
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 97%">
+                                        <ng-ckeditor ng-model="termscondition.content" skin="moono" remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley" name="content"
+                                            required="" ng-disabled="edit == false"></ng-ckeditor>
+                                        <div class="error-container" ng-show="termsconditionForm.content.$error && termsconditionForm.$submitted" ng-messages="termsconditionForm.content.$error">
+                                            <div ng-message="required" class="error">Please Enter Content </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-click="termsClear()">
+                                    Clear
+                                </a>
+                                <button type="submit" ng-click="termsconditionForm.$valid && editSubmit()" title="Submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

@@ -1,0 +1,96 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="responsesForm" role="form" ng-submit="responsesForm.$valid && responsesSubmit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Responses</span>
+                                <span ng-show="is_edit">Edit Responses</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                   
+                                    <section class="col col-6">
+                                           <label class="select">
+<!-- 
+                                            <select name="question_id" ng-class="{
+                                                    'has-errors':responsesForm.question_id.$invalid && responsesForm.$submitted, 'no-errors': responsesForm.question_id.$valid}" ng-model="responses.question_id" ng-options="obj._id as obj.question for obj in questionsinfo" required>
+                                              <option value="" ng-disabled="true">--Select Questions--</option>
+                                             
+                                            </select> -->
+                                            <select multiple ui-select2 name="withuser" style="width:100% !important" ng-class="{
+                                                'has-errors':responsesForm.question_id.$invalid && responsesForm.$submitted, 'no-errors': responsesForm.question_id.$valid}" ng-model="responses.question_id" required>
+                                          <option value="" ng-disabled="true">--Select Questions--</option>
+                                          <option ng-repeat="obj in questionsinfo" value="{{obj._id}}" >{{obj.question}}</option>
+                                        </select>
+                                            <i></i>
+                                        </label>
+                                        <div class="error-container" ng-show="responsesForm.question_id.$error && responsesForm.$submitted" ng-messages="responsesForm.question_id.$error">
+                                           <div ng-message="required" class="error">Please Select Questions!</div>
+                                        </div>
+                                    </section>
+                                     <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':responsesForm.answer.$invalid && responsesForm.$submitted, 'no-errors': responsesForm.answer.$valid}"
+                                                   ng-model="responses.answer" name="answer" placeholder="Answer" required>
+                                        </label>
+                                        <div class="error-container" ng-show="responsesForm.answer.$error && responsesForm.$submitted" ng-messages="responsesForm.answer.$error">
+                                            <div ng-message="required" class="error">Please Enter Answer!</div>
+                                        </div>
+                                    </section>
+                                   
+                                </div>
+                                
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancle" ng-href="#/responses">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="responsesForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="responsesForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<style type="text/css">
+
+    .select2-container-multi .select2-search-choice-close {
+                right: 5px !important;
+                font-size: 15px !important;
+                min-height: 0!important;
+                margin-top: 3px!important;
+                padding: 1px 0 0 5px!important;
+                color: #000;
+            }
+            
+            .select2-container-multi .select2-choices .select2-search-choice {
+                padding: 1px 28px 1px 8px;
+                margin: 4px 0 3px 5px;
+                position: relative;
+                line-height: 18px;
+                color: #000;
+                
+            }
+            
+            .select2-container-multi .select2-search-choice-close { right: 5px !important; font-size: 15px !important; min-height: 0!important; margin-top: 3px!important; padding: 1px 0 0 5px!important; color: #000; }
+            
+            .select2-search-choice-close:before { color: #000; content: "\f057"; position: absolute; right: 0; }
+            .select2-container-multi .select2-search-choice-close {
+                left: auto;
+                background: no-repeat;
+                line-height: 13px;
+            }
+    </style>

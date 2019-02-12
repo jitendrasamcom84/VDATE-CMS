@@ -1,0 +1,866 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+
+    <div class="user-details">
+        <h3 class="user-text">{{user.firstname}}
+            <span ng-if="user.is_online==true" class="online"></span>
+            <span ng-if="user.is_online==false" class="offline"></span>
+        </h3>
+    </div>
+    <ul class="tab-headers user-tabs nav nav-pills">
+        <li class="active">
+            <a data-toggle="pill" href="#member">Member Info</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#preference">Preference</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#subscription">Subscription</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#analysis">Analysis</a>
+        </li>
+    </ul>
+
+    <div class="tab-content details margin-bot">
+        <div id="member" class="tab-pane fade in active">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+                    data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>Member Info</strong>
+                        </h2>
+                        <div class="widget-toolbar" role="menu">
+                        </div>
+                    </header>
+
+                    <div>
+                        <div class="text-center" ng-if="loading">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                        </div>
+                        <div class="widget-body">
+                            <form class="smart-form form-horizontal" method="POST" name="userform" role="form">
+                                <fieldset>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Profile Pic :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <img src="{{user.profile_pic}}" ng-if="user.profile_pic" height="120px"
+                                                width="150px" alt="Avatar" placeholder="First Name" style="margin-bottom: 10px;margin-left: 100px;">
+                                            <img src="../img/default-profile.png" height="120px" width="150px" ng-if="user.profile_pic == ''"
+                                                placeholder="First Name" style="margin-bottom: 10px;margin-left: 100px;">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="user.profile_pic" accept="image/*"
+                                                        name="profile_pic" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-required="true" ng-change="editSubmit()" ng-disabled="profilepic == false">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ user.profile_pic && user.profile_pic ||  'Upload Profile Pic' }}"
+                                                    ng-disabled="profilepic == false">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(6)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12"> <label>User Name :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control allowcharacter" type="text" ng-model="user.firstname"
+                                                placeholder="User Name" ng-blur="editSubmit()" ng-disabled="firstname == false">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(0)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Last Name :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" type="text" ng-model="user.lastname" placeholder="Last Name" ng-blur="editSubmit()" ng-disabled="lastname == false">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit" ng-click="editable(1)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div> -->
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Email :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" type="text" ng-model="user.email" placeholder="Email"
+                                                ng-disabled="true">
+                                        </div>
+                                        <!-- <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div> -->
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Birth Date :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" placeholder="Birth Date" moment-picker="userform.birth_date.stringDate"
+                                                locale="en" name="birth_date" format="YYYY-MM-DD" start-view="month"
+                                                max-date="minYear" ng-model="user.birth_date" ng-disabled="birthdate == false"
+                                                ng-blur="editSubmit()" autocomplete="off">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(4)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Phone Number :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control allownumericwithdecimal" type="text" ng-model="user.phone_number"
+                                                maxlength="15" placeholder="Phone Number" ng-disabled="phonenumber == false"
+                                                ng-blur="editSubmit()">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(5)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Occupation :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" type="text" ng-model="user.occupation" placeholder="Occupation" ng-disabled="occup == false"
+                                                ng-blur="editSubmit()">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit" ng-click="editable(7)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Education :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" type="text" ng-model="user.education" placeholder="education" ng-disabled="educations == false"
+                                                ng-blur="editSubmit()">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit" ng-click="editable(8)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div> -->
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>No of children :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" type="text" ng-model="user.children"
+                                                placeholder="children" ng-disabled="children == false" ng-blur="editSubmit()">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(15)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Place :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-9">
+                                            <input class="form-control" vs-google-autocomplete type="text" ng-model="user.place"
+                                                placeholder="place" ng-disabled="place == false" ng-blur="editSubmit()">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(16)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Status :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <select class="height_15 form-control" ng-model="user.marital_status"
+                                                ng-change="editSubmit()" ng-disabled="active == false">
+                                                <option value="" ng-disabled="true">בחר</option>
+                                                <option value="רווק/ה">רווק/ה</option>
+                                                <option value="גרוש/ה">גרוש/ה</option>
+                                                <option value="פרוד/ה">פרוד/ה</option>
+                                                <option value="אלמן/ה">אלמן/ה</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(14)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Relocation :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.relocation"
+                                                    value="1" ng-change="editSubmit()" ng-disabled="relocation == false">
+                                                <span class="radio_label">Yes</span>
+                                            </div>
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.relocation"
+                                                    value="2" ng-change="editSubmit()" ng-disabled="relocation == false">
+                                                <span class="radio_label">No</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(17)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Visible :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.is_visible_profile"
+                                                    value="Public" ng-change="editSubmit()" ng-disabled="is_visible == false">
+                                                <span class="radio_label">Yes</span>
+                                            </div>
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.is_visible_profile"
+                                                    value="" ng-change="editSubmit()" ng-disabled="is_visible == false">
+                                                <span class="radio_label">No</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(23)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row space">
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <label>Gender :</label>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.gender" value="Male"
+                                                    ng-change="editSubmit()" ng-disabled="gender == false">
+                                                <span class="radio_label">Male</span>
+                                            </div>
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.gender" value="Female"
+                                                    ng-change="editSubmit()" ng-disabled="gender == false">
+                                                <span class="radio_label">Female</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-xs-3">
+                                            <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                                ng-click="editable(3)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- .tab-pane -->
+        <div id="preference" class="tab-pane fade in">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+                    data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>Preference</strong>
+                        </h2>
+                        <div class="widget-toolbar" role="menu">
+
+                        </div>
+                    </header>
+
+                    <div>
+                        <div class="widget-body">
+
+                            <fieldset>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Hair :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.hair" ng-change="editSubmit()"
+                                            ng-disabled="hairs == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="חום">חום</option>
+                                            <option value="כחול">כחול</option>
+                                            <option value="ירוק">ירוק</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(9)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Age :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control" type="text" ng-model="user.m_age" placeholder="Age"
+                                            ng-blur="editSubmit()" ng-disabled="age == false">
+                                    </div>
+                                    <!-- <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(10)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div> -->
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Eyes :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.eyes" ng-change="editSubmit()"
+                                            ng-disabled="eyes == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="חום">חום</option>
+                                            <option value="כחול">כחול</option>
+                                            <option value="ירוק">ירוק</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(11)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Height :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control heigth" type="text" ng-model="user.heights"
+                                            placeholder="Height" ng-blur="editSubmit()" ng-disabled="heights == false"
+                                            maxlength="4">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(12)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Status :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.marital_status" ng-change="editSubmit()"
+                                            ng-disabled="marital_status == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="רווק/ה">רווק/ה</option>
+                                            <option value="גרוש/ה">גרוש/ה</option>
+                                            <option value="פרוד/ה">פרוד/ה</option>
+                                            <option value="אלמן/ה">אלמן/ה</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(13)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Drinking Habits :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.drinking_habit" ng-change="editSubmit()"
+                                            ng-disabled="habit == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="No">לא</option>
+                                            <option value="Sometime">שותה לפעמים</option>
+                                            <option value="Regularly">שותה באופן קבוע</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(18)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Smoking Habits :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.smoking_habit" ng-change="editSubmit()"
+                                            ng-disabled="smoking_habit == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="Yes">כן</option>
+                                            <option value="No">לא</option>
+                                            <option value="Sometime">לפעמים</option>
+                                            <option value="TryingToStop">מנסה להפסיק</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(19)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Religion :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.religion" ng-change="editSubmit()"
+                                            ng-disabled="religion == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="ערבי מוסלמי">ערבי מוסלמי</option>
+                                            <option value="ערבי נוצרי">ערבי נוצרי</option>
+                                            <option value="דרוזי">דרוזי</option>
+                                            <option value="TryingToStop">מנסה להפסיק</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(20)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Sector :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.sector" ng-change="editSubmit()"
+                                            ng-disabled="sector == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="מסורתי">מסורתי</option>
+                                            <option value="דתי">דתי</option>
+                                            <option value="חרדי">חרדי</option>
+                                            <option value="אתאיסט">אתאיסט</option>
+                                            <option value="אספר אחר-כך">אספר אחר-כך</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(21)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Physique :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <select class="form-control" ng-model="user.body_structure" ng-change="editSubmit()"
+                                            ng-disabled="body_structure == false">
+                                            <option value="" ng-disabled="true">בחר</option>
+                                            <option value="רזה">רזה</option>
+                                            <option value="ממוצע">ממוצע</option>
+                                            <option value="שרירי">שרירי</option>
+                                            <option value="חטוב">חטוב</option>
+                                            <option value="אתלטי">אתלטי</option>
+                                            <option value="פרופורציונלי">פרופורציונלי</option>
+                                            <option value="מלא">מלא</option>
+                                            <option value="שמן">שמן</option>
+                                            <option value="חתיך/ה">חתיך/ה</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(22)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Occupation :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control" type="text" ng-model="user.occupation" placeholder="Occupation"
+                                            ng-disabled="occup == false" ng-blur="editSubmit()">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(7)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Education :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control" type="text" ng-model="user.education" placeholder="education"
+                                            ng-disabled="educations == false" ng-blur="editSubmit()">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(8)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>No of children :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control" type="text" ng-model="user.children" placeholder="children"
+                                            ng-disabled="children == false" ng-blur="editSubmit()">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(15)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Place :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <input class="form-control" vs-google-autocomplete type="text" ng-model="user.place"
+                                            placeholder="place" ng-disabled="place == false" ng-blur="editSubmit()">
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(16)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Gender :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="fix_width_radio">
+                                            <input class="radio_admin" type="radio" ng-model="user.gender" value="Male"
+                                                ng-change="editSubmit()" ng-disabled="gender == false">
+                                            <span class="radio_label">Male</span>
+                                        </div>
+                                        <div class="fix_width_radio">
+                                            <label>
+                                                <input class="radio_admin" type="radio" ng-model="user.gender" value="Female"
+                                                    ng-change="editSubmit()" ng-disabled="gender == false">
+                                                <span class="radio_label">Female</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(3)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Relocation :</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="fix_width_radio">
+                                            <input class="radio_admin" type="radio" ng-model="user.relocation" value="1"
+                                                ng-change="editSubmit()" ng-disabled="relocation == false">
+                                            <span class="radio_label">Yes</span>
+                                        </div>
+                                        <div class="fix_width_radio">
+                                            <label>
+                                                <input class="radio_admin" type="radio" ng-model="user.relocation"
+                                                    value="2" ng-change="editSubmit()" ng-disabled="relocation == false">
+                                                <span class="radio_label">No</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
+                                        <button type="button" id="edit" class="btn btn-default btn-xs" title="Edit"
+                                            ng-click="editable(17)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+        <!-- .tab-pane -->
+        <div id="subscription" class="tab-pane fade in">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+                    data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>Subscription</strong>
+                        </h2>
+                        <div class="widget-toolbar" role="menu">
+
+                        </div>
+                    </header>
+                    <div>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Package Name :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            {{membershipinfo.package == null ? "" : membershipinfo.package.packagename}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Date of Purchase :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            {{membershipinfo == null ? "" : membershipinfo.create_date | date:"dd/MM/yyyy hh:mm a"}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Paid price :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            {{membershipinfo.package == null ? "" : membershipinfo.package.price}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Expiring Date :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            {{expiryedate}}
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Remaining Days :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            {{membershipinfo == null ? "" : membershipinfo.RemainingDays}}
+                                        </label>
+                                    </div>
+                                </div> -->
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                    
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <button type="button" class="freeze pull-left btn btn-default btn-sm">Freeze</button>
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 col-xs-2">
+                                        <button type="button" class="unfreeze btn btn-default btn-sm">Unfreeze</button>
+                                    </div>
+                                </div>
+                                <div class="row space">
+                                    <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <label>Freezing counter :</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            27/08/2018
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- .tab-pane -->
+        <div id="analysis" class="tab-pane fade in">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+                    data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>Analysis</strong>
+                        </h2>
+                        <div class="widget-toolbar" role="menu">
+
+                        </div>
+                    </header>
+
+                    <div>
+                        <div class="widget-body">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8">
+                                        <div class="row space">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>Last Login :</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>
+                                                    {{user.last_login | date : "dd/MM/yyyy hh:mm"}}
+                                                    <!-- {{user.previous_login | date : "dd/MM/yyyy hh:mm"}} -->
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row space">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>Number of sessions :</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>
+                                                    {{user.Numberofsessions == null ? "0" : user.Numberofsessions}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row space">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>Number of friends :</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>
+                                                    {{appfriendsinfo.length == null ? "0" :appfriendsinfo.length}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row space">
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>Number of sent messages :</label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                                <label>
+                                                    {{no_of_messages == null ? "0" : no_of_messages}}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        <div class="row space">
+                                            <div class="col-md-10 col-sm-10">
+                                                <button type="button" class="system btn btn-default" ng-click="openpopup(user)">Send
+                                                    a system message</button>
+                                            </div>
+                                            <div class="col-md-10 col-sm-10">
+                                                <button type="button" ng-if="user.active==1" class="block btn btn-default"
+                                                    ng-click="blockUnblock()"><i class="fa fa-ban"></i> Block</button>
+                                                <button type="button" ng-if="user.active==0" class="block btn btn-default"
+                                                    ng-click="blockUnblock()"><i class="fa fa-unlock"></i> UnBlock</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+            </article>
+        </div>
+        <!-- .tab-pane -->
+    </div>
+    <!-- .tab-content -->
+</section>
+<!--Popup start-->
+<div ng-if="ShowPopup">
+    <div class="overlay" ng-style="{'opacity':ClosePopup ? '0' : '1','visibility':ClosePopup ? 'hidden':'visible'}">
+        <div class="popup new_delet_popup">
+            <div class="popup_content">
+                <div class="list_user_content">
+                    <div style="text-align: center;">
+                        <h2 style="font-weight: normal;text-transform: none;color: black;border-bottom: 0px;">
+                            Send a system message
+                        </h2>
+                        <textarea name="message" ng-model="message" placeholder="Type Message ........" style="margin-bottom: 10px;width: 430px;height: 119px;"></textarea>
+                    </div>
+                    <div class="popup_footer" style="text-align: center;">
+                        <span class="table_content">
+                            <button type="button" id="send" title="Send" class="btn btn-default" ng-click="sendMessage(message)">
+                                Send
+                            </button>
+                            <button type="button" id="close" title="Close" class="btn btn-default" ng-click="hidePopup()">
+                                Close
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Popup end-->
+<style>
+    .warning {
+        color: red;
+    }
+
+    .nowarning {
+        color: green;
+    }
+
+    input[type=date]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        display: none;
+    }
+
+    img {
+        border-radius: 50%;
+    }
+</style>

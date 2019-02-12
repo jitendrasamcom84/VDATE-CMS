@@ -1,0 +1,76 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="threadsForm" role="form" ng-submit="threadsForm.$valid && threadsSubmit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                <span ng-hide="is_edit">Add Threads</span>
+                                <span ng-show="is_edit">Edit Threads</span>
+                            </header>
+                            <fieldset>
+                                 <div class="row">
+                                   
+                                    <section class="col col-md-12">
+                                        <label class="textarea">
+                                            <textarea type="text" ng-class="{
+                                                    'has-errors':threadsForm.subject.$invalid && threadsForm.$submitted, 'no-errors': threadsForm.subject.$valid}"
+                                                   ng-model="threads.subject" name="subject" placeholder="Subject" required></textarea>
+                                        </label>
+                                        <div class="error-container" ng-show="threadsForm.subject.$error && threadsForm.$submitted" ng-messages="threadsForm.subject.$error">
+                                            <div ng-message="required" class="error">Please Enter Subject!</div>
+                                        </div>
+                                    </section>
+                                    
+                                </div>
+                                <div class="row">
+                                        <section class="col col-6"  ng-hide="is_edit">
+                                                <label class="select">
+        
+                                                 <select name="user_added" ng-class="{
+                                                         'has-errors':threadsForm.user_added.$invalid && threadsForm.$submitted, 'no-errors': threadsForm.user_added.$valid}" ng-model="threads.user_added" ng-options="obj._id as obj.firstname for obj in userinfo" required>
+                                                   <option value="" ng-disabled="true">--Select Member--</option>
+                                                  
+                                                 </select>
+                                                 <i></i>                                
+                                                 </label>
+                                                 <div class="error-container" ng-show="threadsForm.user_added.$error &&
+                                                 threadsForm.$submitted" ng-messages="threadsForm.user_added.$error">
+                                                 <div ng-message="required" class="error">Please Select Member!</div>
+                                                 </div>
+                                         </section>
+                                    <section class="col col-6">
+                                        <label class=""><b>Approved :</b>
+                                           <input type="radio" name="isapproved" ng-model="threads.isapproved" value="1" required>&nbsp;Yes
+                                                   &nbsp;&nbsp; 
+                                            <input type="radio" name="isapproved" ng-model="threads.isapproved" value="0" required>&nbsp;No            
+                                        </label>
+                                          <div class="error-container" ng-show="threadsForm.isapproved.$error && threadsForm.$submitted" ng-messages="threadsForm.isapproved.$error">
+                                        <div ng-message="required" class="error">Please Select Approved!</div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/threads">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="threadsForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="threadsForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+

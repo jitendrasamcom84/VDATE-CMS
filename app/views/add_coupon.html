@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="xol-md-12 col-sm-12 col-xs-12">
+    <div class="order form-border">
+      <form class="coupon-form ng-pristine ng-valid" method="POST" name="couponForm" role="form" ng-submit="couponForm.$valid && couponSubmit()"
+        novalidate enctype="multipart/form-data">
+        <header>
+          <span class="add-coupon legend-title" ng-hide="buttonShow">Add New Coupon</span>
+          <span class="add-coupon legend-title" ng-show="buttonShow">Edit Coupon</span>
+          <a class="add btn btn-default btn-sm pull-right" title="Add" ng-href="#/coupon">
+            Back
+          </a>
+        </header>
+        <fieldset class="main-set">
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Name</label>
+              <input type="text" class="form-control" tabindex="1" ng-class="{
+                'has-errors':couponForm.name.$invalid && couponForm.$submitted, 'no-errors': couponForm.name.$valid}" ng-model="coupon.name"
+                name="name" placeholder="Name" required="" autocomplete="off">
+              <div class="error-container" ng-show="couponForm.name.$error && couponForm.$submitted" ng-messages="couponForm.name.$error">
+                <div ng-message="required" class="error">Please Enter Name</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Discount</label>
+              <div class="input-group date">
+              <input type="text" class="form-control allownumericwithdecimal discount" maxlength="3" tabindex="2" ng-class="{
+                'has-errors':couponForm.discount.$invalid && couponForm.$submitted, 'no-errors': couponForm.discount.$valid}"
+                ng-model="coupon.discount" name="discount" placeholder="Discount" required="" autocomplete="off">
+                <span class="input-group-addon">
+                  <span class="fa fa-percent"></span>
+                </span>
+              </div>
+              <div class="error-container" ng-show="couponForm.discount.$error && couponForm.$submitted" ng-messages="couponForm.discount.$error">
+                <div ng-message="required" class="error">Please Enter Discount</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Expiring Date</label>
+              <div class="input-group date">
+                <input class="form-control" tabindex="3" placeholder="Select Expiry Date" moment-picker="couponForm.expire_date.stringDate"
+                  locale="en" name="expire_date" format="YYYY-MM-DD" start-view="month" min-date="minDateString" required="true"
+                  validate="false" ng-model="coupon.expire_date" readonly ng-class="{
+                   'has-errors':couponForm.expire_date.$invalid && couponForm.$submitted, 'no-errors': couponForm.expire_date.$valid}">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+              <div class="error-container" ng-show="couponForm.expire_date.$error && couponForm.$submitted" ng-messages="couponForm.expire_date.$error">
+                <div ng-message="required" class="error">Please Select Expiry Date</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="">Linked to specific user?</label>
+              <select multiple ui-select2 style="width:100% !important" tabindex="4" name="linked_user" 
+                ng-model="coupon.linked_user" placeholder="Select Linked User">
+                <option value="" ng-disabled="true">Select Linked User</option>
+                 <option ng-repeat="obj in userinfo" value="{{obj._id}}">{{obj.firstname}}</option>
+              </select>
+              <i></i>
+              <!-- <div class="error-container" ng-show="couponForm.linked_user.$error && couponForm.$submitted" ng-messages="couponForm.linked_user.$error">
+                <div ng-message="required" class="error">Please Select Linked User</div>
+              </div> -->
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label class="">User</label>
+              <select class="form-control" tabindex="5" name="user" ng-model="coupon.user"
+                ng-options="obj._id as obj.firstname for obj in userinfo">
+                <option value="" ng-disabled="true">Select User</option>
+              </select>
+              <i></i>
+              <!-- <div class="error-container" ng-show="couponForm.user.$error && couponForm.$submitted" ng-messages="couponForm.user.$error">
+                <div ng-message="required" class="error">Please Select User</div>
+              </div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="submit" tabindex="6" ng-click="couponForm.$valid && submit()" title="Submit" class="btn btn-default" ng-hide="is_edit">
+                  Submit
+              </button>
+              <button type="submit" tabindex="4" ng-click="couponForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-default">
+                  Update
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+
+  .select2-container-multi .select2-search-choice-close {
+              right: 5px !important;
+              font-size: 15px !important;
+              min-height: 0!important;
+              margin-top: 3px!important;
+              padding: 1px 0 0 5px!important;
+              color: #000;
+          }
+          
+          .select2-container-multi .select2-choices .select2-search-choice {
+              padding: 1px 28px 1px 8px;
+              margin: 4px 0 3px 5px;
+              position: relative;
+              line-height: 18px;
+              color: #000;
+              
+          }
+          
+          .select2-container-multi .select2-search-choice-close { right: 5px !important; font-size: 15px !important; min-height: 0!important; margin-top: 3px!important; padding: 1px 0 0 5px!important; color: #000; }
+          
+          .select2-search-choice-close:before { color: #000; content: "\f057"; position: absolute; right: 0; }
+          .select2-container-multi .select2-search-choice-close {
+              left: auto;
+              background: no-repeat;
+              line-height: 13px;
+          }
+  </style>

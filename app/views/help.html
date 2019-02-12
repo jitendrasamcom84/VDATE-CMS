@@ -1,0 +1,375 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <header>
+        <div class="help-details">
+            <div class="row space">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <span>Help</span>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <span class="about-date">{{latest_date | date : "dd/MM/yyyy"}}</span>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <span class="user-update">{{useradded}}</span>
+                </div>
+                <div class="col-md-1 col-sm-1 col-xs-6">
+                    <button type="button" id="edit" class="btn btn-default btn-xs" ng-click="editable()" title="Edit">
+                        <i class="fa fa-edit" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <ul class="tab-headers user-tabs nav nav-pills">
+        <li class="active">
+            <a data-toggle="pill" href="#video" ng-click="typeName('video')">Video</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#questionnaire" ng-click="typeName('question')">Questionnaire</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#cv" ng-click="typeName('cv')">CV</a>
+        </li>
+        <li>
+            <a data-toggle="pill" href="#profile" ng-click="typeName('profile')">Profile</a>
+        </li>
+    </ul>
+
+    <div class="tab-content details margin-bot">
+        <div id="video" class="tab-pane fade in active">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="cboverlay" ng-hide="editvideo == true">&nbsp</div>
+                            <form class="smart-form form-horizontal" method="POST" name="videoForm" role="form" ng-submit="videoForm.$valid && videoFormSubmit()"
+                                novalidate enctype="multipart/form-data" autocomplete="off">
+
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <label class="input">
+                                                <input ng-class="{
+                                                            'has-errors':videoForm.title.$invalid && videoForm.$submitted, 'no-errors': videoForm.title.$valid}"
+                                                    type="text" ng-model="videos.title" name="title" placeholder="Title" required="">
+                                            </label>
+                                            <div class="error-container" ng-show="videoForm.title.$error && videoForm.$submitted" ng-messages="videoForm.title.$error">
+                                                <div ng-message="required" class="error">Please Enter Title</div>
+                                            </div>
+                                        </section>
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <ng-ckeditor ng-model="videos.content" skin="moono" remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                                name="content" required=""></ng-ckeditor>
+                                            <div class="error-container" ng-show="videoForm.content.$error && videoForm.$submitted" ng-messages="videoForm.content.$error">
+                                                <div ng-message="required" class="error">Please Enter Content</div>
+                                            </div>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="videos.firstvideo" accept="video/*" name="firstvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="change()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ videos.firstvideo && videos.firstvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <!-- <div class="error-container" ng-show="videoForm.firstvideo.$error && videoForm.$submitted" ng-messages="videoForm.firstvideo.$error">
+                                                <div ng-message="required" class="error">Please Select Video</div>
+                                            </div> -->
+                                            <br>
+                                            <div class="text-center" ng-if="videoloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="videos.firstvideo" style="width: 520px; height: 295px;" controls>
+                                                <source src="{{ videos.firsts_video }}">
+                                            </video>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="videos.secondvideo" accept="video/*" name="secondvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="secondvideoChange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ videos.secondvideo && videos.secondvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <!-- <div class="error-container" ng-show="videoForm.secondvideo.$error && videoForm.$submitted" ng-messages="videoForm.secondvideo.$error">
+                                                <div ng-message="required" class="error">Please Select Video</div>
+                                            </div> -->
+                                            <br>
+                                            <div class="text-center" ng-if="secondvideoloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="videos.secondvideo" style="width: 520px; height: 295px;" ng-model="videos.secondvideo" controls>
+                                                <source src="{{ videos.secondsss_video }}">
+                                            </video>
+                                        </section>
+                                    </div>
+                                    <div class="row pull-right">
+                                        <div class="col-xs-12">
+                                            <button type="submit" tabindex="4" ng-click="videoForm.$valid && videosubmit(videos._id)" title="Submit" class="btn btn-default">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- .tab-pane -->
+        <div id="questionnaire" class="tab-pane fade in">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="cboverlay" ng-hide="editquestion == true">&nbsp</div>
+                            <form class="smart-form form-horizontal" method="POST" name="questionForm" role="form" ng-submit="questionForm.$valid && questionFormSubmit()"
+                                novalidate enctype="multipart/form-data">
+
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <label class="input">
+                                                <input ng-class="{
+                                                    'has-errors':questionForm.title.$invalid && questionForm.$submitted, 'no-errors': questionForm.title.$valid}"
+                                                    type="text" ng-model="question.title" name="title" placeholder="Title" required="">
+                                            </label>
+                                            <div class="error-container" ng-show="questionForm.title.$error && questionForm.$submitted" ng-messages="questionForm.title.$error">
+                                                <div ng-message="required" class="error">Please Enter Title</div>
+                                            </div>
+                                        </section>
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <ng-ckeditor ng-model="question.content" skin="moono" remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                                name="content" required=""></ng-ckeditor>
+                                            <div class="error-container" ng-show="questionForm.content.$error && questionForm.$submitted" ng-messages="questionForm.content.$error">
+                                                <div ng-message="required" class="error">Please Enter Content</div>
+                                            </div>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="question.firstvideo" accept="video/*" name="firstvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="QueFirstVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ question.firstvideo && question.firstvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="questionloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="question.firstvideo" style="width: 520px; height: 295px;" ng-model="question.firstvideo"
+                                                controls>
+                                                <source src="{{ question.firsts_video }}">
+                                            </video>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="question.secondvideo" accept="video/*" name="secondvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="QueSecondVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ question.secondvideo && question.secondvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="quesecondvideoloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="question.secondvideo" style="width: 520px; height: 295px;" ng-model="question.secondvideo"
+                                                controls>
+                                                <source src="{{ question.secondsss_video }}">
+                                            </video>
+                                        </section>
+
+                                    </div>
+                                    <div class="row pull-right">
+                                        <div class="col-xs-12">
+                                            <button type="submit" tabindex="4" ng-click="questionForm.$valid && questionsubmit(question._id)" title="Submit" class="btn btn-default">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div id="cv" class="tab-pane fade in ">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="cboverlay" ng-hide="editcv == true">&nbsp</div>
+                            <form class="smart-form form-horizontal" method="POST" name="cvForm" role="form" ng-submit="cvForm.$valid && cvFormSubmit()"
+                                novalidate enctype="multipart/form-data">
+
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <label class="input">
+                                                <input ng-class="{
+                                                                    'has-errors':cvForm.title.$invalid && cvForm.$submitted, 'no-errors': cvForm.title.$valid}"
+                                                    type="text" ng-model="cv.title" name="title" placeholder="Title" required="">
+                                            </label>
+                                            <div class="error-container" ng-show="cvForm.title.$error && cvForm.$submitted" ng-messages="cvForm.title.$error">
+                                                <div ng-message="required" class="error">Please Enter Title</div>
+                                            </div>
+                                        </section>
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <ng-ckeditor ng-model="cv.content" skin="moono" remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                                name="content" required=""></ng-ckeditor>
+                                            <div class="error-container" ng-show="cvForm.content.$error && cvForm.$submitted" ng-messages="cvForm.content.$error">
+                                                <div ng-message="required" class="error">Please Enter Content</div>
+                                            </div>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="cv.firstvideo" accept="video/*" name="firstvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="CVFirstVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ cv.firstvideo && cv.firstvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="cvloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="cv.firstvideo" style="width: 520px; height: 295px;" ng-model="cv.firstvideo"
+                                                controls>
+                                                <source src="{{ cv.firsts_video }}">
+                                            </video>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="cv.secondvideo" accept="video/*" name="secondvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="CVSecondVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ cv.secondvideo && cv.secondvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="cvsecondvideoloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="cv.secondvideo" style="width: 520px; height: 295px;" ng-model="cv.secondvideo"
+                                                controls>
+                                                <source src="{{ cv.secondsss_video }}">
+                                            </video>
+                                        </section>
+                                    </div>
+                                    <div class="row pull-right">
+                                        <div class="col-xs-12">
+                                            <button type="submit" tabindex="4" ng-click="cvForm.$valid && cvsubmit(cv._id)" title="Submit" class="btn btn-default">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div id="profile" class="tab-pane fade in ">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div class="cboverlay" ng-hide="editprofile == true">&nbsp</div>
+                            <form class="smart-form form-horizontal" method="POST" name="profileForm" role="form" ng-submit="profileForm.$valid && profileFormSubmit()"
+                                novalidate enctype="multipart/form-data">
+
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <label class="input">
+                                                <input ng-class="{'has-errors':profileForm.title.$invalid && profileForm.$submitted, 'no-errors': profileForm.title.$valid}"
+                                                    type="text" ng-model="profile.title" name="title" placeholder="Title" required="">
+                                            </label>
+                                            <div class="error-container" ng-show="profileForm.title.$error && profileForm.$submitted" ng-messages="profileForm.title.$error">
+                                                <div ng-message="required" class="error">Please Enter Title</div>
+                                            </div>
+                                        </section>
+                                        <section class="col-sm-12" style="width: 97%">
+                                            <ng-ckeditor ng-model="profile.content" skin="moono" remove-buttons="Image" ng-change="removeSpace()" remove-plugins="iframe,flash,smiley"
+                                                name="content" required=""></ng-ckeditor>
+                                            <div class="error-container" ng-show="profileForm.content.$error && profileForm.$submitted" ng-messages="profileForm.content.$error">
+                                                <div ng-message="required" class="error">Please Enter Content</div>
+                                            </div>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="profile.firstvideo" accept="video/*" name="firstvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="ProfileFirstVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ profile.firstvideo && profile.firstvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="profileloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="profile.firstvideo" style="width: 520px; height: 295px;" ng-model="profile.firstvideo"
+                                                controls>
+                                                <source src="{{ profile.firsts_video }}">
+                                            </video>
+                                        </section>
+                                        <section class="col col-6">
+                                            <div class="input input-file">
+                                                <span class="button">
+                                                    <input ngf-select="" ng-model="profile.secondvideo" accept="video/*" name="secondvideo" type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                        ng-change="ProfileSecondVideochange()">Browse</span>
+                                                <input type="text" readonly="" placeholder="{{ profile.secondvideo && profile.secondvideo ||  'Upload Video' }}">
+                                            </div>
+                                            <br>
+                                            <div class="text-center" ng-if="profilesecondvideoloading">
+                                                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                            </div>
+                                            <video ng-show="is_edit" ng-if="profile.secondvideo" style="width: 520px; height: 295px;" ng-model="profile.secondvideo"
+                                                controls>
+                                                <source src="{{ profile.secondsss_video }}">
+                                            </video>
+                                        </section>
+
+                                    </div>
+                                    <div class="row pull-right">
+                                        <div class="col-xs-12">
+                                            <button type="submit" tabindex="4" ng-click="profileForm.$valid && profilesubmit(profile._id)" title="Submit" class="btn btn-default">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    <!-- .tab-content -->
+
+</section>
+<style>
+    .warning {
+        color: red;
+    }
+
+    .nowarning {
+        color: green;
+    }
+
+    .cboverlay {
+        background: white;
+        opacity: 0.5;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .page-footer {
+        z-index: 3;
+    }
+</style>

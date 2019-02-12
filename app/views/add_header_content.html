@@ -1,0 +1,41 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="contetnForm" role="form" ng-submit="v.$valid && contentSubmit()"
+                            novalidate enctype="multipart/form-data">
+                            <header>
+                                <span class="add-order legend-title" ng-hide="buttonShow">Header Content</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 97%">
+                                            <!-- <h4 style="margin-bottom:10px"><b>Content</b></h4> -->
+                                        <ng-ckeditor name="content" ng-model="content.title" skin="moono"
+                                            remove-buttons="Image" remove-plugins="iframe,flash,smiley" required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="contetnForm.content.$error && contetnForm.$submitted"
+                                            ng-messages="contetnForm.content.$error">
+                                            <div ng-message="required" class="error">Please Add Header Content</div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-click="contentClear()">
+                                    Clear
+                                </a>
+                                <button type="submit" ng-click="contetnForm.$valid && editSubmit(2)" title="Submit"
+                                    class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

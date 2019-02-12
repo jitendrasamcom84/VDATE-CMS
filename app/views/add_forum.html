@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-sm-12 col-xs-12">
+    <div class="forum form-border">
+      <form class="forum-form" method="POST" name="forumForm" role="form" ng-submit="forumForm.$valid && forumSubmit()" novalidate
+        enctype="multipart/form-data">
+        <header>
+          <span class="add-forum legend-title" ng-hide="buttonShow">Add Forum</span>
+          <span class="add-forum legend-title" ng-show="buttonShow">Edit Forum</span>
+          <a class="add btn btn-default btn-sm pull-right" title="Add" ng-href="#/forum_list">
+            Back
+          </a>
+        </header>
+        <fieldset class="main-set">
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Subject</label>
+              <textarea type="text" class="form-control" tabindex="1" ng-class="{
+                'has-errors':forumForm.subject.$invalid && forumForm.$submitted, 'no-errors': forumForm.subject.$valid}"
+                ng-model="forum.subject" name="subject" placeholder="Name" required="" autocomplete="off"></textarea>
+              <div class="error-container" ng-show="forumForm.subject.$error && forumForm.$submitted" ng-messages="forumForm.subject.$error">
+                <div ng-message="required" class="error">Please Enter Subject</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Content</label>
+              <textarea type="text" class="form-control" tabindex="1" ng-class="{
+                'has-errors':forumForm.content.$invalid && forumForm.$submitted, 'no-errors': forumForm.content.$valid}"
+                ng-model="forum.content" name="content" placeholder="Content" required="" autocomplete="off"></textarea>
+              <div class="error-container" ng-show="forumForm.content.$error && forumForm.$submitted" ng-messages="forumForm.content.$error">
+                <div ng-message="required" class="error">Please Enter Content</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">User</label>
+              <select class="form-control" tabindex="5" name="user_added" ng-class="{
+                'has-errors':forumForm.user_added.$invalid && forumForm.$submitted, 'no-errors': forumForm.user_added.$valid}"
+                ng-model="forum.user_added" ng-options="obj._id as obj.firstname for obj in userinfo" required>
+                <option value="" ng-disabled="true">Select User</option>
+              </select>
+              <i></i>
+              <div class="error-container" ng-show="forumForm.user_added.$error && forumForm.$submitted" ng-messages="forumForm.user_added.$error">
+                <div ng-message="required" class="error">Please Enter User</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-2">
+              <button type="submit" ng-click="forumForm.$valid && submit()" value="Create Forum" title="Submit" class="btn btn-default"
+                ng-hide="is_edit">
+                Submit
+              </button>
+              <button type="submit" ng-click="forumForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-default">
+                Update
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

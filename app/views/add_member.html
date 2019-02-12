@@ -1,0 +1,308 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+
+                        <form class="smart-form form-horizontal" method="POST" name="userform" ng-submit="userform.$valid && userSubmit()"
+                            role="form" novalidate enctype="multipart/form-data" autocomplete="off">
+
+                            <header>
+                                <span ng-hide="buttonShow">Add Member</span>
+                                <span ng-show="buttonShow">Edit Member</span>
+                                <div class="text-center" ng-if="loading">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                                </div>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width : 97%">
+                                        <label class="input">
+                                            <input type="text" class="allowcharacter" ng-class="{
+                                                    'has-errors':userform.first_name.$invalid && userform.$submitted, 'no-errors': userform.first_name.$valid}"
+                                                ng-model="user.firstname" name="first_name" placeholder="UserName"
+                                                required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.first_name.$error && userform.$submitted"
+                                            ng-messages="userform.first_name.$error">
+                                            <div ng-message="required" class="error">Please Enter User Name</div>
+                                        </div>
+                                    </section>
+                                    <!-- <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':userform.last_name.$invalid && userform.$submitted, 'no-errors': userform.last_name.$valid}"
+                                                   ng-model="user.lastname" name="last_name" placeholder="Last Name" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.last_name.$error && userform.$submitted" ng-messages="userform.last_name.$error">
+                                            <div ng-message="required" class="error">Please Enter Last Name!</div>
+                                            </div>
+                                    </section> -->
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="email" ng-class="{
+                                                    'has-errors':userform.email.$invalid && userform.$submitted, 'no-errors': userform.email.$valid}"
+                                                ng-model="user.email" ng-disabled="is_edit" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/"
+                                                name="email" placeholder="Email" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.email.$error && userform.$submitted"
+                                            ng-messages="userform.email.$error">
+                                            <span class="error" ng-show="userform.email.$error.required">Please Enter
+                                                Email Address
+                                            </span>
+                                            <span class="error" ng-show="userform.email.$dirty&&userform.email.$error.pattern">Please
+                                                Enter Valid Email Address</span>
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input" ng-if="is_edit==false">
+                                            <input type="password" ng-class="{
+                                                    'has-errors':userform.password.$invalid && userform.$submitted, 'no-errors': userform.password.$valid}"
+                                                ng-model="user.password" ng-disabled="is_edit" name="password"
+                                                placeholder="Password" ng-required="true" autocomplete="off">
+                                        </label>
+                                        <div ng-if="is_edit==false" class="error-container" ng-show="userform.password.$error && userform.$submitted"
+                                            ng-messages="userform.password.$error">
+                                            <div ng-message="required" class="error">Please Enter Password</div>
+                                        </div>
+                                        <div ng-if="is_edit==false" class="error-container">
+                                            <div class="error" ng-if="user.password.length < 8">Password must contain
+                                                atleast
+                                                8 characters</div>
+                                        </div>
+                                        <label class="input" ng-if="is_edit==true">
+                                            <input type="password" ng-disabled="is_edit==true" ng-class="{
+                                                    'has-errors':userform.passwosdfsdfrd.$invalid && userform.$submitted, 'no-errors': userform.passwosdfsdfrd.$valid}"
+                                                value="********" name="passwosdfsdfrd" placeholder="Password"
+                                                ng-required="true">
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input ng-class="{
+                                            'has-errors':userform.phone_number.$invalid && userform.$submitted, 'no-errors': userform.phone_number.$valid}"
+                                                type="text" class='allownumericwithdecimal' ng-model="user.phone_number"
+                                                name="phone_number" placeholder="Phone Number" minlength="6" maxlength="15"
+                                                required="">
+                                        </label>
+                                        <div class="error-container" ng-show="userform.phone_number.$error && userform.$submitted"
+                                            ng-messages="userform.phone_number.$error">
+
+                                            <div ng-message="required" class="error">Please Enter Phone Number</div>
+                                            <div ng-messages-include="views/error-list.html"></div>
+
+                                        </div>
+
+
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <div class="input-group date">
+                                                <input class="form-control" tabindex="3" placeholder="Select Birth Date"
+                                                    moment-picker="userform.birth_date.stringDate" locale="en" name="birth_date"
+                                                    format="YYYY-MM-DD" start-view="month" max-date="minYear"
+                                                    ng-required="true" validate="false" ng-model="user.birth_date"
+                                                    readonly ng-class="{
+                                                    'has-errors':userform.birth_date.$invalid && userform.$submitted, 'no-errors': userform.birth_date.$valid}">
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </label>
+                                        <!-- <label class="input">
+                                            <i class="icon-append fa fa-calendar" ng-click="open1()"></i>
+                                            <input type="text" ng-class="{
+                                            'has-errors':userform.birth_date.$invalid && userform.$submitted, 'no-errors': userform.birth_date.$valid}"
+                                                name="birth_date" ng-readonly="true" uib-datepicker-popup="{{format}}" ng-model="user.birth_date"
+                                                is-open="popup1.opened" placeholder="Birth Date" datepicker-options="dateOptions"
+                                                ng-required="true" close-text="Close" alt-input-formats="altInputFormats" 
+                                            />
+
+                                        </label> -->
+                                        <div class="error-container" ng-show="userform.birth_date.$error && userform.$submitted"
+                                            ng-messages="userform.birth_date.$error">
+                                            <div ng-message="required" class="error">Please Select Birth Date</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" class='allownumericwithdecimal' ng-model="user.children"
+                                                name="children" placeholder="Number of children">
+                                        </label>
+                                        <!-- <div class="error-container" ng-show="userform.children.$error && userform.$submitted"
+                                            ng-messages="userform.children.$error">
+                                            <div ng-message="required" class="error">Please enter number of children</div>
+                                        </div> -->
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input vs-google-autocomplete ng-class="{
+                                                    'has-errors':userform.place.$invalid && userform.$submitted, 'no-errors': userform.place.$valid}"
+                                                type="text" ng-model="user.place" name="place" placeholder="Place"
+                                                required="">
+                                        </label>
+                                        <div class="error-container" ng-show="userform.place.$error && userform.$submitted"
+                                            ng-messages="userform.place.$error">
+                                            <div ng-message="required" class="error">Please enter Place</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="select">
+                                            <select style="width:100% !important" name="subscription" 
+                                                ng-model="user.subscription" ng-options="obj._id as obj.packagename for obj in packageinfo">
+                                                <option value="" ng-disabled="true">&nbsp;Select Subscription</option>
+                                            </select>
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="user.profile_pic" accept="image/*" name="profile_pic"
+                                                    type="file" onchange="this.parentNode.nextSibling.value = this.value"
+                                                    ng-change="change()" ng-required="true">Browse</span><input type="text"
+                                                ng-class="{
+                                                'has-errors':userform.profile_pic.$invalid && userform.$submitted, 'no-errors': userform.profile_pic.$valid}"
+                                                readonly="" placeholder="{{ user.profile_pic && user.profile_pic ||  'Upload Profile Pic' }}">
+                                        </div>
+                                        <div class="error-container" ng-show="userform.profile_pic.$error && userform.$submitted"
+                                            ng-messages="userform.profile_pic.$error">
+                                            <div ng-message="required" class="error">Please Select Profile Pic</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row col-sm-6">
+                                    <section class="col col-4 padding_0">
+                                        <span class="radio_heading"><b>Gender :</b></span>
+                                        <div class="full_div">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.gender" name="gender"
+                                                    value="Male" ng-required="true">
+                                                <span class="radio_label">Male</span>
+                                            </div>
+
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.gender" name="gender"
+                                                    value="Female" ng-required="true">
+                                                <span class="radio_label">Female</span>
+                                            </div>
+                                        </div>
+                                        <div class="error-container" ng-show="userform.gender.$error && userform.$submitted"
+                                            ng-messages="userform.gender.$error">
+                                            <div ng-message="required" class="error">Please Select Gender</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="radio_heading"><b>Relocation :</b></span>
+                                        <div class="full_div">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.relocation" name="relocation"
+                                                    value="1" ng-required="true">
+                                                <span class="radio_label">Yes</span>
+                                            </div>
+
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.relocation" name="relocation"
+                                                    value="2" ng-required="true">
+                                                <span class="radio_label">No</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="error-container" ng-show="userform.relocation.$error && userform.$submitted"
+                                            ng-messages="userform.relocation.$error">
+                                            <div ng-message="required" class="error">Please Select Relocation</div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-4 padding_0">
+                                        <span class="radio_heading"><b>Visible :</b></span>
+                                        <div class="full_div">
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.is_visible_profile"
+                                                    name="is_visible_profile" value="Public" ng-required="true">
+                                                <span class="radio_label">Yes</span>
+                                            </div>
+                                            <div class="fix_width_radio">
+                                                <input class="radio_admin" type="radio" ng-model="user.is_visible_profile"
+                                                    name="is_visible_profile" value="no" ng-required="true">
+                                                <span class="radio_label">No</span>
+                                            </div>
+                                        </div>
+                                        <div class="error-container" ng-show="userform.is_visible_profile.$error && userform.$submitted"
+                                            ng-messages="userform.is_visible_profile.$error">
+                                            <div ng-message="required" class="error">Please Select Visible Profile</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6" ng-show="is_edit">
+                                        <!-- <img ng-src="{{ user.profile_image }}" ng-model="user.profile_pic" ng-show="is_edit" width="200" height="150" style="margin-left:50px"> -->
+
+                                        <img src="{{user.profile_image}}" ng-if="user.profile_image" height="120px"
+                                            width="150px" alt="Avatar" placeholder="First Name" style="margin-bottom: 10px;margin-left: 100px;">
+                                        <img src="../img/default-profile.png" height="120px" width="150px" ng-if="user.profile_image == ''"
+                                            placeholder="First Name" style="margin-bottom: 10px;margin-left: 100px;">
+
+                                    </section>
+                                </div>
+
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/member">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="userform.$valid && submit()" title="Submit" class="btn btn-primary"
+                                    ng-hide="is_edit" ng-disabled="buttonDisabled==true">
+                                    Submit
+                                </button>
+                                <button type="submit" ng-click="userform.$valid && memberUpdate()" title="Update"
+                                    ng-show="is_edit" class="btn btn-primary" ng-disabled="buttonDisabled==true">
+                                    Update
+                                </button>
+                                <br>
+                                <br>
+                                <br>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<script>
+    function validateEmail(emailField) {
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(emailField.value) == false) {
+            alert('Invalid Email Address');
+            return false;
+        }
+
+        return true;
+
+    }
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+        var fileupload = document.getElementById("FileUpload1");
+        var filePath = document.getElementById("spnFilePath");
+        var image = document.getElementById("imgFileUpload");
+        image.onclick = function () {
+            fileupload.click();
+        };
+        fileupload.onchange = function () {
+            var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
+            filePath.innerHTML = "<b>Selected File: </b>" + fileName;
+        };
+    };
+</script>

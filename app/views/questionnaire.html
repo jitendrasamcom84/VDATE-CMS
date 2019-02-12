@@ -1,0 +1,239 @@
+<ul class="tab-headers questionnaire-tabs nav nav-pills">
+    <li ng-class="{'active' : activeclass == -1}" ng-click="updateIndex(-1)">
+        <a data-toggle="pill" href="#home">Preferences</a>
+    </li>
+    <li ng-class="{'active' : activeclass == 0}">
+        <a data-toggle="pill" href="#question1" ng-click="loadSubCatinfo(0)">Question 1</a>
+    </li>
+    <li ng-class="{'active' : activeclass == 1}" ng-click="loadSubCatinfo(1)">
+        <a data-toggle="pill" href="#question1">Question 2</a>
+    </li>
+    <li ng-class="{'active' : activeclass == 2}" ng-click="loadSubCatinfo(2)">
+        <a data-toggle="pill" href="#question1">Question 3</a>
+    </li>
+    <li ng-class="{'active' : activeclass == 3}" ng-click="loadSubCatinfo(3)">
+        <a data-toggle="pill" href="#question1">Question 4</a>
+    </li>
+</ul>
+
+<div class="tab-content questionnaire-details margin-bot">
+    <div id="home" ng-class="{'active' : activeclass == -1}" class="tab-pane fade in">
+        <div class="row space">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding" style="margin-bottom: 40px">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>Parameter</strong>
+                        </h2>
+                        <h2 class="count">{{ques_catinfo == null ? "0" : '1 - '+ ques_catinfo.length}}</h2>
+                        <div class="widget-toolbar" role="menu">
+                            <div class="btn-group">
+                                <a ng-hide="buttonHide" class="add btn btn-default btn-xs" title="Add" ng-href="#/ques_cat/add">
+                                    Add
+                                </a>
+                            </div>
+                        </div>
+                    </header>
+                    <div>
+                        <div class="text-center" ng-if="loading">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                        </div>
+                        <div class="widget-body table-responsive">
+                            <table id="" dt-column-defs="dtColumnDefs" class="table table-striped table-responsive table-bordered table-hover" datatable="ng">
+                                <thead style="white-space: nowrap;">
+                                    <tr>
+                                        <th>Category Name</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="qc in ques_catinfo track by $index" ng-class="{ 'active': qc.$edit }">
+                                        
+                                        <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                                        <span style="display:none">{{$index}}</span><span>{{ qc.name}}</span>
+                                        </td>
+                                        <td data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }">
+                                            <span ng-bind-html="qc.description" style="word-break: break-all !important"></span>
+                                        </td>
+
+                                        <td data-title="'Actions'">
+                                            <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editQues_Cat('/ques_cat/Edit/' + qc._id)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                            <!-- <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(qc)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button> -->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    <!-- #home-->
+
+    <div id="question1" ng-class="{'active' : activeclass == 0 || activeclass == 1 || activeclass == 2 || activeclass == 3}"
+        class="tab-pane fade in">
+        <div class="row space">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding" style="margin-bottom: 40px">
+                <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+                    <header>
+                        <h2>
+                            <strong>{{ques_cat_name}}</strong>
+                        </h2>
+                        <h2 class="count">{{subcatinfo == null ? "0" : '1 - '+ subcatinfo.length}}</h2>
+                        <div class="widget-toolbar" role="menu">
+                            <div class="btn-group">
+                                <a class="add btn btn-default btn-xs" title="Add" ng-href="#/subcategory/add/{{ques_cat_id}}">
+                                    Add
+                                </a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div>
+                        <div class="text-center" ng-if="loading">
+                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                        </div>
+                        <div class="widget-body table-responsive">
+                            <table id="" dt-column-defs="dtColumnDefs" class="table table-striped table-responsive table-bordered table-hover" datatable="ng">
+                                <thead style="white-space: nowrap;">
+                                    <tr>
+                                        <th>Category Name</th>
+                                        <th>Subcategory Name</th>
+                                        <th></th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="sub in subcatinfo" ng-class="{ 'active': qc.$edit }">
+                                        <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">
+                                            <span>{{ sub.ques_cat.name}}</span>
+                                        </td>
+                                        <td data-title="'Subcategory Name'" sortable="'subcat_name'" filter="{ 'subcat_name': 'text' }">
+                                            <span>{{ sub.subcat_name}}</span>
+                                        </td>
+                                        <td>
+                                            <a class="add btn btn-default" title="Enter" ng-href="#/question_queue/{{sub._id}}">Enter</a>
+                                        </td>
+                                        <td data-title="'Actions'">
+                                            <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editSub_Cat('/subcategory/Edit/' +sub._id)">
+                                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </button>
+                                            <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteDataSub(sub)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!-- <tbody ng-if="subcatinfo == ''">
+                                    <span>
+                                        No data available
+                                    </span>
+                                </tbody> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+    <!-- #menu1 -->
+</div>
+<!-- tab-content -->
+
+
+
+
+<!-- <div class="ques-inner">
+<div class="row space">
+  <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding" style="margin-bottom: 40px">
+    <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+        <header>
+            <h2>
+                <strong>Category namedescription</strong>
+            </h2>
+            <h2 class="count">1-5</h2>
+            <div class="widget-toolbar" role="menu">
+                <div class="btn-group">
+                    <a class="add btn btn-default btn-xs" title="Back">
+                        Back
+                    </a>
+                </div>
+            </div>
+          </header>
+          <header>
+            <h2>
+                <strong>Question</strong>
+            </h2>
+            <div class="widget-toolbar" role="menu">
+              <div class="btn-group">
+                  <a class="add btn btn-default btn-xs" title="Add">
+                      Add
+                  </a>
+              </div>
+            </div>
+        </header>
+
+        <div>
+            <div class="text-center" ng-if="loading">
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+            </div>
+            <div class="widget-body table-responsive">
+                <table id="" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="table table-striped table-responsive table-bordered table-hover">
+                    <thead style="white-space: nowrap;">
+                        <tr>
+                            <th>Question No</th>
+                            <th>Value</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th></th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td>
+                                <span>Question 1</span>
+                            </td>
+                            <td>
+                                <span>Lorem Ipsum</span>
+                            </td>
+                            <td>
+                                <span>Lorem Ipsum</span>
+                            </td>
+                            <td>
+                                <span>Lorem Ipsum</span>
+                            </td>
+                            <td>
+                                <span>Lorem Ipsum</span>
+                            </td>
+                            <td>
+                                 <span>Lorem Ipsum</span>
+                            </td>
+                            <td data-title="'Actions'">
+                                <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editPackages('/packages/Edit/' + p._id)">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(p)">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </article>
+</div>
+</div> -->

@@ -1,0 +1,113 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 margin-bot nopadding">
+        <div class="jarviswidget" id="checkin_checkout" data-widget-editbutton="false" data-widget-togglebutton="false"
+            data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="true">
+            <header>
+                <h2>
+                    <strong>Checkouts</strong>
+                </h2>
+                <div class="widget-toolbar" role="menu">
+
+                </div>
+            </header>
+
+            <div>
+                <div class="text-center" ng-if="loading">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i>
+                </div>
+                <div class="widget-body table-responsive">
+                    <table id="" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+
+                                <th>Member Name</th>
+                                <th>Email</th>
+                                <th>Package Name</th>
+                                <th>Address</th>
+                                <th>Amount</th>
+                                <th>Credit Card Number</th>
+                                <th>Card Holder ID</th>
+                                <th>Card Name</th>
+                                <th>Card Due Date</th>
+                                <!-- <th>Card Producer</th> -->
+                                <th>Auth Number</th>
+                                <th>Direct Debit</th>
+                                <!-- <th>GroupId</th>
+                                <th>Terminal Name</th>
+                                <th>Transaction Date</th> -->
+                                <th>Transaction Status</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ck in checkoutsinfo" ng-class="{ 'active': ck.$edit }">
+
+
+                                <td data-title="'Member Name'" sortable="'user_name'" filter="{ 'user_name': 'text' }">
+                                    <span>{{ ck.user_id == null ? "" : ck.user_id.firstname}}</span>
+                                </td>
+                                <td data-title="'Email'" sortable="'c_email'" filter="{ 'c_email': 'email' }">
+                                    <span>{{ ck.user_id == null ? "" : ck.user_id.email}}</span>
+                                </td>
+                                <td data-title="'Package Name'" sortable="'packagename'" filter="{ 'packagename': 'email' }">
+                                    <span>{{ ck.package_id == null ? "" : ck.package_id.packagename}}</span>
+                                </td>
+                                <td data-title="'Address'" sortable="'Address'" filter="{ 'Address': 'text' }">
+                                    <span>{{ ck.Address}}</span>
+                                </td>
+                                <td data-title="'Amount'" sortable="'Amount'" filter="{ 'Amount': 'text' }">
+                                    <span>{{ ck.Amount}}</span>
+                                </td>
+                                <td data-title="'Credit Card Number'" sortable="'creditcardnumber'" filter="{ 'creditcardnumber': 'number' }">
+                                    <span>{{ ck.CardNum}}</span>
+                                </td>
+                                <td data-title="'Card Holder ID'" sortable="'CardHolderId'" filter="{ 'CardHolderId': 'text' }">
+                                    <span>{{ ck.CardHolderId}}</span>
+                                </td>
+                                <td data-title="'Card Name'" sortable="'CardName'" filter="{ 'CardName': 'text' }">
+                                    <span>{{ ck.CardName}}</span>
+                                </td>
+                                <td data-title="'Card Due Date'" sortable="'CardDueDate'" filter="{ 'CardDueDate': 'text' }">
+                                    <span>{{ ck.CardDueDate}}</span>
+                                </td>
+                                <!-- <td data-title="'Card Producer'" sortable="'CardProducer'" filter="{ 'CardProducer': 'text' }">
+                                    <span>{{ ck.CardProducer}}</span>
+                                </td> -->
+                                <td data-title="'Auth Number'" sortable="'AuthNum'" filter="{ 'AuthNum': 'text' }">
+                                    <span>{{ ck.AuthNum}}</span>
+                                </td>
+                                <td data-title="'Direct Debit'" sortable="'direct_debit'" filter="{ 'direct_debit': 'text' }">
+                                    <span>{{ ck.direct_debit == true?'Yes':'No' }}</span>
+                                </td>
+                                <!-- <td data-title="'GroupId'" sortable="'v'" filter="{ 'GroupId': 'text' }">
+                                    <span>{{ ck.GroupId}}</span>
+                                </td>
+                                <td data-title="'TerminalName'" sortable="'v'" filter="{ 'TerminalNames': 'text' }">
+                                    <span>{{ ck.TerminalName}}</span>
+                                </td>
+                                <td data-title="'TransactionDateTime'" sortable="'TransactionDateTime'" filter="{ 'TransactionDateTime': 'date' }">
+                                    <span>{{ ck.TransactionDateTime | date:"yyyy/MM/dd"}}</span>
+                                </td> -->
+                                <td data-title="'Direct Debit'" sortable="'direct_debit'" filter="{ 'direct_debit': 'text' }">
+                                    <span>{{ ck.transaction == true?'Yes':'No' }}</span>
+                                </td>
+                                <!-- <td data-title="'Actions'">
+                                    <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(ck)">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+<style>
+    td,
+    th {
+        white-space: nowrap;
+    }
+</style>

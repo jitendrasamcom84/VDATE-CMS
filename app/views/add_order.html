@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="order form-border">
+      <form class="order-form" class="smart-form form-horizontal" method="POST" name="orderForm" role="form" ng-submit="orderForm.$valid && orderSubmit()"
+        novalidate enctype="multipart/form-data">
+        <header>
+          <span class="add-order legend-title" ng-hide="buttonShow">Add New Order</span>
+          <span class="add-order legend-title" ng-show="buttonShow">Edit Order</span>
+          <a class="add btn btn-default btn-sm pull-right" title="Add" ng-href="#/order">
+            Back
+          </a>
+        </header>
+        <fieldset class="main-set">
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">User</label>
+              <select class="form-control" tabindex="1" name="user" ng-class="{
+                        'has-errors':orderForm.user.$invalid && orderForm.$submitted, 'no-errors': orderForm.user.$valid}"
+                ng-model="order.user" ng-options="obj._id as obj.firstname for obj in userinfo" required>
+                <option value="" ng-disabled="true">Select User</option>
+              </select>
+              <i></i>
+              <div class="error-container" ng-show="orderForm.user.$error && orderForm.$submitted" ng-messages="orderForm.user.$error">
+                <div ng-message="required" class="error">Please Select User</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Package</label>
+              <select class="form-control" tabindex="1" name="package" ng-class="{
+                  'has-errors':orderForm.package.$invalid && orderForm.$submitted, 'no-errors': orderForm.package.$valid}"
+                ng-model="order.package" ng-change="myFunc()" ng-options="obj._id as obj.packagename for obj in packageinfo"
+                required>
+                <option value="" ng-disabled="true">Select Package</option>
+              </select>
+              <i></i>
+              <div class="error-container" ng-show="orderForm.package.$error && orderForm.$submitted" ng-messages="orderForm.package.$error">
+                <div ng-message="required" class="error">Please Select Package</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Price</label>
+              <input type="text" class="form-control allownumericwithdecimal" tabindex="2" ng-class="{
+                'has-errors':orderForm.price.$invalid && orderForm.$submitted, 'no-errors': orderForm.price.$valid}" ng-model="order.price" name="price" placeholder="Price"
+                required="" autocomplete="off">
+              <div class="error-container" ng-show="orderForm.price.$error && orderForm.$submitted" ng-messages="orderForm.price.$error">
+                <div ng-message="required" class="error">Please Enter Price</div>
+              </div>
+            </div>
+          </div>
+          <div class="row space">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label class="">Discount</label>
+              <div class="input-group date">
+                <input type="text" class="form-control allownumericwithdecimal discount" maxlength="3" tabindex="3" ng-class="{
+                'has-errors':orderForm.discount.$invalid && orderForm.$submitted, 'no-errors': orderForm.discount.$valid}"
+                  ng-model="order.discount" name="discount" placeholder="Discount" required="" autocomplete="off">
+                <span class="input-group-addon">
+                  <span class="fa fa-percent"></span>
+                </span>
+              </div>
+              <div class="error-container" ng-show="orderForm.discount.$error && orderForm.$submitted" ng-messages="orderForm.discount.$error">
+                <div ng-message="required" class="error">Please Enter Discount</div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="submit" tabindex="4" ng-click="orderForm.$valid && submit()" title="Submit" class="btn btn-default" ng-hide="is_edit">
+                Submit
+              </button>
+              <button type="submit" tabindex="4" ng-click="orderForm.$valid && editSubmit()" title="Update" ng-show="is_edit" class="btn btn-default">
+                Update
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

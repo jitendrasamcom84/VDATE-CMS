@@ -1,0 +1,63 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+        <div class="jarviswidget" id="checkin_checkout" 
+             data-widget-editbutton="false"
+             data-widget-togglebutton="false"
+             data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false"
+             data-widget-custombutton="true">
+            <header>
+                <h2><strong>Contact US</strong></h2>
+                <div class="widget-toolbar" role="menu">
+                    
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body table-responsive">
+                    <table id="tblContactUSData" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                
+                                <th>Full Name</th>
+                                <th>Phone Number</th>
+                                <th>Email</th>
+                                <th>Headline</th>
+                                <th>Content</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="c in contactusinfo"  ng-class="{ 'active': c.$edit }">
+                            
+                                <td data-title="'c_fullname'" sortable="'c_fullname'" filter="{ 'c_fullname': 'text' }">
+                                    <span>{{ c.c_fullname}}</span>
+                                </td>
+                                <td data-title="'c_phone'" sortable="'c_phone'" filter="{ 'c_phone': 'number' }">
+                                    <span>{{ c.c_phone}}</span>
+                                </td>
+                                <td data-title="'c_mail'" sortable="'c_mail'" filter="{ 'c_mail': 'text' }">
+                                    <span>{{ c.c_mail}}</span>
+                                </td>
+                                <td data-title="'c_headline'" sortable="'c_headline'" filter="{ 'c_headline': 'text' }">
+                                    <span>{{ c.c_headline}}</span>
+                                </td>
+                                <td data-title="'c_content'" sortable="'c_content'" filter="{ 'c_content': 'text' }">
+                                    <span>{{ c.c_content}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'date' }">
+                                        <span>{{ c.create_date | date:"yyyy/MM/dd"}}</span>
+                                    </td>
+                                <td data-title="'Actions'">
+                                   <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(c)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

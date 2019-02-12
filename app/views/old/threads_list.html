@@ -1,0 +1,71 @@
+<section id="widget-grid" class="">
+    <!-- NEW WIDGET START -->
+    <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding">
+        <div class="jarviswidget" id="checkin_checkout" 
+             data-widget-editbutton="false"
+             data-widget-togglebutton="false"
+             data-widget-deletebutton="false"
+             data-widget-fullscreenbutton="false"
+             data-widget-custombutton="true">
+            <header>
+                <h2><strong>Threads</strong></h2>
+                <div class="widget-toolbar" role="menu">
+                    <div class="btn-group">
+                        <a class="btn btn-primary btn-xs" title="Add Threads" ng-href="#/threads/add">
+                            Add Threads
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body table-responsive">
+                    <table id="tblThreadsData" dt-column-defs="dtColumnDefs" dt-options="dtOptions" datatable="ng" class="table table-striped table-bordered table-hover">
+                        <thead style="white-space: nowrap;">
+                            <tr>
+                                
+                               <th>Subject</th>
+                                <th>Content</th>
+                               <th>User Added</th>
+                               <th>Approved</th>
+                               <th>Added date</th>
+                               <th>Last Changed</th>
+                               <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="t in threadsinfo"  ng-class="{ 'active': t.$edit }">
+                            
+                                <td data-title="'subject'" sortable="'subject'" filter="{ 'subject': 'text' }">
+                                    <span>{{ t.subject}}</span>
+                                </td>
+
+                                <td data-title="'content'" sortable="'content'" filter="{ 'content': 'text' }">
+                                    <span>{{ t.content}}</span>
+                                </td>
+
+                                <td data-title="'user_added'" sortable="'user_added'" filter="{ 'user_added': 'text' }">
+                                    <span>{{ t.user_added.firstname}}</span>
+                                </td>
+                                <td data-title="'isapproved'" sortable="'isapproved'" filter="{ 'isapproved': 'text' }">
+                                    <span>{{ t.isapproved == true?'Yes':'No'}}</span>
+                                </td>
+                                <td data-title="'create_date'" sortable="'create_date'" filter="{ 'create_date': 'date' }">
+                                        <span>{{ t.create_date | date: "yyyy/MM/dd"}}</span>
+                                    </td>
+                                    <td data-title="'last_updated'" sortable="'last_updated'" filter="{ 'last_updated': 'text' }">
+                                        <span>{{ t.last_updated | date: "yyyy/MM/dd"}}</span>
+                                    </td>
+                                <td data-title="'Actions'">
+                                     <button type="button" id="edit" class="btn btn-default" title="Edit" ng-click="editThreads('/threads/Edit/' + t._id)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                     <button type="button" id="delete" title="Delete" class="btn btn-default" ng-click="deleteData(t)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                     <button type="button" if="isapproved" ng-click="approvedData(t)" class="btn btn-default">{{ t.isapproved == true ? 'Decline' : 'Approved' }}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

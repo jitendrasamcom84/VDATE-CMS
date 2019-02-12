@@ -1,0 +1,114 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="userform" role="form" ng-submit="userform.$valid && submit()" novalidate enctype="multipart/form-data">
+                            <header>
+                                Add User
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':userform.first_name.$invalid && userform.$submitted, 'no-errors': userform.first_name.$valid}"
+                                                   ng-model="user.first_name" name="first_name" placeholder="FirstName" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.first_name.$error && userform.$submitted" ng-messages="userform.first_name.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':userform.last_name.$invalid && userform.$submitted, 'no-errors': userform.last_name.$valid}"
+                                                   ng-model="user.last_name" name="last_name" placeholder="LastName" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.last_name.$error && userform.$submitted" ng-messages="userform.last_name.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':userform.user_name.$invalid && userform.$submitted, 'no-errors': userform.user_name.$valid}"
+                                                   ng-model="user.user_name" name="user_name" placeholder="Username" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.user_name.$error && userform.$submitted" ng-messages="userform.user_name.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="email" ng-class="{
+                                                    'has-errors':userform.email.$invalid && userform.$submitted, 'no-errors': userform.email.$valid}"
+                                                   ng-model="user.email" name="email" placeholder="Email" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.email.$error && userform.$submitted" ng-messages="userform.email.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input ng-class="{
+                                'has-errors':userform.phone_number.$invalid && userform.$submitted, 'no-errors': userform.phone_number.$valid}" type="text" numbers-only ng-model="user.phone_number" name="phone_number" placeholder="Phone Number" minlength="10" maxlength="15" required="">
+                                        </label>
+                                       <div class="error-container" ng-show="userform.phone_number.$error && userform.$submitted" ng-messages="userform.phone_number.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="new_user_avatar" accept="image/*" name="new_user_avatar" type="file" onchange="this.parentNode.nextSibling.value = this.value">Browse</span><input type="text" readonly="">
+                                        </div>
+                                        <div class="error-container">
+                                            <div class="error" ng-if="userform.new_user_avatar.$error.pattern">File type is not accepted. Acceptable files: .png</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input"> 
+                                            <i class="icon-append fa fa-calendar" ng-click="open1()"></i>
+                                            <input type="text" ng-readonly="true" class="form-control" uib-datepicker-popup="{{format}}" ng-model="user.date_of_birth" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input type="password" ng-class="{
+                                                    'has-errors':userform.password.$invalid && userform.$submitted, 'no-errors': userform.password.$valid}"
+                                                   ng-model="user.password" name="password" placeholder="Password" required>
+                                        </label>
+                                        <div class="error-container" ng-show="userform.password.$error && userform.$submitted" ng-messages="userform.password.$error">
+                                            <div ng-messages-include="views/error-list.html"></div>
+                                        </div>
+                                        <div class="error-container">
+                                            <div class="error" ng-if="user.password.length < 8">Password must contain atleast 8 characters!</div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+
+                            <footer>
+                                <a type="button" class="btn btn-danger" ng-href="#/users">
+                                    Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

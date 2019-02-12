@@ -1,0 +1,121 @@
+<section id="widget-grid" class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+        <article class="col-sm-12 col-md-12 col-lg-12 margin-bot" style="margin-bottom: 40px;">
+            <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-custombutton="false">
+                <div>
+                    <div class="widget-body no-padding">
+                        <form class="smart-form form-horizontal" method="POST" name="packageForm" role="form" ng-submit="packageForm.$valid && packageSubmit()"
+                            novalidate enctype="multipart/form-data" autocomplete="off">
+                            <header>
+                                <span ng-hide="buttonShow">Add Packages</span>
+                                <span ng-show="buttonShow">Edit Packages</span>
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':packageForm.packagename.$invalid && packageForm.$submitted, 'no-errors': packageForm.packagename.$valid}"
+                                                ng-model="packages.packagename" name="packagename" placeholder="Package Name"
+                                                required="">
+                                        </label>
+                                        <div class="error-container" ng-show="packageForm.packagename.$error && packageForm.$submitted" ng-messages="packageForm.packagename.$error">
+                                            <div ng-message="required" class="error">Please Enter Package Name</div>
+                                        </div>
+                                    </section>
+
+                                    <section class="col col-6">
+
+                                        <label class="input">
+                                            <input type="text" ng-class="{
+                                                    'has-errors':packageForm.duration.$invalid && packageForm.$submitted, 'no-errors': packageForm.duration.$valid}"
+                                                class='allownumericwithdecimal' ng-model="packages.duration" name="duration"
+                                                placeholder="Duration (Days)" required>
+                                        </label>
+                                        <div class="error-container" ng-show="packageForm.duration.$error && packageForm.$submitted" ng-messages="packageForm.duration.$error">
+                                            <div ng-message="required" class="error">Please Enter Duration</div>
+                                        </div>
+
+                                    </section>
+
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+
+                                        <label class="input">
+                                            <div class="input-group">
+                                                <input type="text" ng-class="{
+                                                    'has-errors':packageForm.price.$invalid && packageForm.$submitted, 'no-errors': packageForm.price.$valid}"
+                                                    ng-model="packages.price" class='allownumericwithdecimal' name="price" placeholder="Price"
+                                                    required>
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-shekel"></span>
+                                                </span>
+                                            </div>
+
+                                        </label>
+                                        <div class="error-container" ng-show="packageForm.price.$error && packageForm.$submitted" ng-messages="packageForm.price.$error ">
+                                            <div ng-message-include="view/error-list.html"></div>
+                                        </div>
+                                        <p ng-show="packageForm.price.$error.required && packageForm.$submitted" class="error">Please Enter Package Price</p>
+
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <input ng-class="{
+                                                            'has-errors':packageForm.color.$invalid && packageForm.$submitted, 'no-errors': packageForm.color.$valid}"
+                                                colorpicker type="text" ng-model="packages.color" name="color" placeholder="Color"
+                                                required="" />
+                                        </label>
+                                        <div class="error-container" ng-show="packageForm.color.$error && packageForm.$submitted" ng-messages="packageForm.color.$error">
+                                            <div ng-message="required" class="error">Please Enter Color</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col-sm-12" style="width: 97%">
+                                        <!-- <ng-ckeditor ng-model="packages.description" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley" 
+                                                name="description" required=""></ng-ckeditor> -->
+                                        <ng-ckeditor name="description" ng-model="packages.description" skin="moono" remove-buttons="Image" remove-plugins="iframe,flash,smiley"
+                                            required=""></ng-ckeditor>
+                                        <div class="error-container" ng-show="packageForm.description.$error && packageForm.$submitted" ng-messages="packageForm.description.$error">
+                                            <div ng-message="required" class="error">Please Add Description</div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <div class="input input-file">
+                                            <span class="button">
+                                                <input ngf-select="" ng-model="packages.photo" accept="image/jpeg,image/png" name="photo" type="file" onchange="this.parentNode.nextSibling.value = this.value" ng-required="true" ng-change="change()">Browse</span><input type="text" ng-class="{
+                                            'has-errors':packageForm.photo.$invalid && packageForm.$submitted, 'no-errors': packageForm.photo.$valid}" readonly="" placeholder="{{ packages.photo && packages.photo ||  'Upload Image' }}">
+                                        </div>
+                                        <div class="error-container" ng-show="packageForm.photo.$error && packageForm.$submitted" ng-messages="packageForm.photo.$error">
+                                        <div ng-message="required" class="error">Please Select Image</div>
+                                        </div>
+                                        <br>
+                                    <img ng-src="{{ packages.profile_image }}" ng-model="packages.photo"  ng-show="is_edit" width="200" height="150" style="margin-left:50px">
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <footer>
+                                <a type="button" class="btn btn-danger" title="Cancel" ng-href="#/packages">
+                                    Cancel
+                                </a>
+                                <button type="submit" ng-click="packageForm.$valid && submit()" title="Submit" class="btn btn-primary" ng-if="is_edit==false" ng-hide="is_edit">
+                                    Submit
+                                </button>
+
+                                <button type="submit" ng-click="packageForm.$valid && editSubmit()" title="Update" ng-if="is_edit==true" ng-show="is_edit" class="btn btn-primary">
+                                    Update
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

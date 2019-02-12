@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="order form-border">
+      <form class="smart-form form-horizontal" method="POST" name="pushForm" role="form" ng-submit="pushForm.$valid && pushSubmit()"
+        novalidate enctype="multipart/form-data">
+        <header>
+          <span class="add-order legend-title">Push Details</span>
+          <a class="add btn btn-default btn-sm pull-right" title="Add" ng-href="#/push">
+            Back
+          </a>
+        </header>
+        <fieldset class="main-set push_details_page">
+          <div class="row mb-30">
+            <div class="col-md-7 col-sm-7 col-xs-12">
+              <div class="select_date">
+                <label>Last date between</label>
+                
+                  <div class="input-group date push_details">
+                    <input type="text" placeholder="Select Date" moment-picker="pushForm.from_date.stringDate" locale="en" name="from_date"
+                      format="YYYY-MM-DD" start-view="month" max-date="minDateString" required="true" validate="false" ng-model="pushs.from_date" readonly
+                      ng-class="{
+                        'has-errors':pushForm.from_date.$invalid && pushForm.$submitted, 'no-errors': pushForm.from_date.$valid}"
+                      tabindex="1">
+                      <!-- <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span> -->
+                      <div class="error-container" ng-show="pushForm.from_date.$error && pushForm.$submitted"   ng-messages="pushForm.from_date.$error">
+                        <div ng-message="required" class="error">Please Select Date</div>
+                      </div>
+                      <i class="fa fa-calendar push_detail_calendar" aria-hidden="true"></i>
+                  </div>
+                <span>and</span>
+                
+                  <div class="input-group date push_details">
+                    <input placeholder="Select Date" moment-picker="pushForm.to_date.stringDate" locale="en" name="to_date"
+                      format="YYYY-MM-DD" start-view="month" max-date="minDateString" required="true" validate="false" ng-model="pushs.to_date" readonly
+                      ng-class="{
+                        'has-errors':pushForm.to_date.$invalid && pushForm.$submitted, 'no-errors': pushForm.to_date.$valid}"
+                      tabindex="1">
+                      <!-- <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span> -->
+                      <div class="error-container" ng-show="pushForm.to_date.$error && pushForm.$submitted"   ng-messages="pushForm.to_date.$error">
+                        <div ng-message="required" class="error">Please Select Date</div>
+                      </div>
+                      <i class="fa fa-calendar push_detail_calendar" aria-hidden="true"></i>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-30">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="ques-per">
+                <label>Questionnaire percentage less than</label>
+                <div class="input-group date display-up">
+                  <input type="text" class="allownumericwithdecimal percentage" tabindex="3"
+                    ng-model="pushs.percentage" name="percentage" placeholder="Percentage"  autocomplete="off" maxlength="3">
+                  <!-- <span class="input-group-addon">
+                    <span class="fa fa-percent"></span>
+                  </span> -->
+                  <!-- <div class="error-container" ng-show="pushForm.percentage.$error && pushForm.$submitted" ng-messages="pushForm.percentage.$error">
+                      <div ng-message="required" class="error">Please Enter Percentage!</div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-30">
+            <div class="col-md-8 col-sm-8 col-xs-12">
+              <label>Number of friends betweeen</label>
+              <div class="input-group date display-up">
+                <input type="text" class="allownumericwithdecimal" tabindex="4"
+                  ng-model="pushs.from_num_frd" name="from_num_frd" placeholder="Number Friend"  autocomplete="off">
+                  <!-- <div class="error-container" ng-show="pushForm.from_num_frd.$error && pushForm.$submitted" ng-messages="pushForm.from_num_frd.$error">
+                      <div ng-message="required" class="error">Please Enter Number Friend!</div>
+                  </div> -->
+              </div>
+              <span>and</span>
+              <div class="input-group date display-up">
+                <input type="text" class="allownumericwithdecimal" tabindex="5"
+                  ng-model="pushs.to_num_frd" name="to_num_frd" placeholder="Number Friend" autocomplete="off">
+                  <!-- <div class="error-container" ng-show="pushForm.to_num_frd.$error && pushForm.$submitted" ng-messages="pushForm.to_num_frd.$error">
+                      <div ng-message="required" class="error">Please Enter Number Friend!</div>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-30">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <label>Subscription Package</label>
+              <div class="subscription-pack">
+                  <select class="sub-pack-sel" multiple ui-select2 style="width:50% !important" tabindex="6" name="package" ng-model="pushs.package"
+                    placeholder="Select Package">
+                    <option value="" ng-disabled="true">--Select Package--</option>
+                    <option ng-repeat="obj in packageinfo" value="{{obj._id}}">{{obj.packagename}}</option>
+                  </select>
+                  <i class="fa fa-angle-down"></i>
+                  <!-- <div class="error-container" ng-show="pushForm.package.$error && pushForm.$submitted" ng-messages="pushForm.package.$error">
+                      <div ng-message="required" class="error">Please Select Package!</div>
+                  </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row mb-30">
+            <div class="col-xs-10">
+              <textarea type="text" class="push-message" rows="4" tabindex="7"
+                ng-model="pushs.message" name="message" placeholder="Enter Message" autocomplete="off"
+                 ng-class="{
+                  'has-errors':pushForm.message.$invalid && pushForm.$submitted, 'no-errors': pushForm.message.$valid}" required></textarea>
+              <div class="error-container" ng-show="pushForm.message.$error && pushForm.$submitted" ng-messages="pushForm.message.$error">
+                <div ng-message="required" class="error">Please Enter Message</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-30">
+            <div class="col-xs-12">
+              <label class="notice">Number of user which have been filtered <span>{{num_of_fillterUser}}</span></label>
+            </div>
+          </div>
+          <div class="row mb-30">
+            <div class="col-xs-1">
+              <button type="submit" tabindex="8" ng-click="pushForm.$valid && filterData()" title="Submit" class="btn btn-default" ng-hide="is_edit">
+                Submit
+              </button>
+              </div>
+              <!-- <div class="col-xs-1">
+              <button type="submit" tabindex="9" ng-click="pushForm.$valid && filterData()" title="Submit" class="btn btn-default" ng-hide="is_edit">
+                  Filter
+                </button>
+            </div> -->
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  .select2-container-multi .select2-search-choice-close {
+    right: 5px !important;
+    font-size: 15px !important;
+    min-height: 0 !important;
+    margin-top: 3px !important;
+    padding: 1px 0 0 5px !important;
+    color: #000;
+  }
+
+  .select2-container-multi .select2-choices .select2-search-choice {
+    padding: 1px 28px 1px 8px;
+    margin: 4px 0 3px 5px;
+    position: relative;
+    line-height: 18px;
+    color: #000;
+
+  }
+
+  .select2-container-multi .select2-search-choice-close {
+    right: 5px !important;
+    font-size: 15px !important;
+    min-height: 0 !important;
+    margin-top: 3px !important;
+    padding: 1px 0 0 5px !important;
+    color: #000;
+  }
+
+  .select2-search-choice-close:before {
+    color: #000;
+    content: "\f057";
+    position: absolute;
+    right: 0;
+  }
+
+  .select2-container-multi .select2-search-choice-close {
+    left: auto;
+    background: no-repeat;
+    line-height: 13px;
+  }
+</style>
