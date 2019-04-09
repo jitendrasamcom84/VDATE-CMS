@@ -1,0 +1,83 @@
+<!-- User info -->
+<div class="login-info" ng-controller="ProfileCtrl">
+    <span>
+        <!-- User image size is adjusted inside CSS, it should stay as is -->
+
+        <a href="">
+            <img src="img/avatars/admin_logo.jpg" alt="me" class="online" />
+            <span data-localize="">
+                {{login_user.firstname}}
+            </span>
+            <i class="fa fa-angle-down"></i>
+        </a>
+
+    </span>
+</div>
+<!-- end user info -->
+
+<!-- NAVIGATION : This navigation is also responsive
+
+To make this navigation dynamic please make sure to link the node
+(the reference to the nav > ul) after page load. Or the navigation
+will not initialize.
+-->
+<navigation>
+
+    <!-- <nav:item data-view="/" data-icon="fa fa-lg fa-fw fa-dashboard" title="Dashboard" role="admin" /> -->
+    <nav:item data-view="/member" class="main_menu" class="not_open_sub_menu" data-icon="fa fa-lg fa-fw fa-user" title="Members"
+        role="admin" />
+
+    <!-- <nav:item data-view="/packages" class="main_menu" data-icon="fa fa-lg fa-fw fa-gift" title="Packages" role="admin" /> -->
+    <nav:group class="remove_submenu" data-icon="fa fa-lg fa-fw fa-gift" title="Packages" role="admin">
+        <nav:item data-view="/packages" class="main_menu" data-icon="fa fa-lg fa-fw fa-gift" title="Packages" role="admin" />
+        <nav:item data-view="/package_header" class="main_menu" data-icon="fa fa-lg fa-fw fa-gift" title="Package Header"
+            role="admin" />
+    </nav:group>
+    <!-- <nav:item data-view="/videos" class="main_menu" data-icon="fa fa-lg fa-fw fa-video-camera" title="Videos" role="admin" /> -->
+    <nav:group class="remove_submenu" data-icon="fa fa-lg fa-fw fa-video-camera" title="Video" role="admin">
+        <nav:item data-view="/videos" class="main_menu" data-icon="fa fa-lg fa-fw fa-video-camera" title="Video List" role="admin" />
+        <nav:item data-view="/video_notification" class="main_menu" data-icon="fa fa-lg fa-fw fa-bell" title="Video Notification"
+            role="admin" />
+    </nav:group>
+    <!-- <nav:item data-view="/ques_cat" data-icon="fa fa-lg fa-fw fa-question-circle" title="Question Category" role="admin" />
+    <nav:item data-view="/questions" data-icon="fa fa-lg fa-fw fa-question" title="Questions" role="admin" />
+    <nav:item data-view="/responses" data-icon="fa fa-lg fa-fw fa-reply" title="Responses" role="admin" /> -->
+    <nav:item data-view="/events" class="main_menu" data-icon="fa fa-lg fa-fw fa-calendar-check-o" title="Events" role="admin" />
+    <!-- <nav:item data-view="/threads" data-icon="fa fa-lg fa-fw fa-check" title="Threads" role="admin" /> -->
+    <!--<nav:item data-view="/posts" data-icon="fa fa-lg fa-fw fa-tags" title="Posts" role="admin"/>-->
+    <nav:item data-view="/checkouts" class="main_menu" data-icon="fa fa-lg fa-fw fa-credit-card" title="Checkouts" role="admin" />
+    <!-- <nav:item data-view="/contactus" data-icon="fa fa-lg fa-fw fa-phone" title="Contact US" role="admin" /> -->
+    <nav:group data-view="/contactus" class="remove_submenu" data-icon="fa fa-lg fa-fw fa-phone" title="Contact US"
+        role="admin">
+        <nav:item data-view="/contactus" data-icon="fa fa-lg fa-fw fa-phone" title="Contact US List" role="admin" />
+        <nav:item data-view="/contactus_headline" data-icon="fa fa-lg fa-fw fa-list" title="Headline List" role="admin" />
+    </nav:group>
+
+    <nav:item data-view="/order" class="main_menu" data-icon="fa fa-lg fa-fw fa-shopping-cart" title="Order" role="admin" />
+    <nav:item data-view="/coupon" class="main_menu" data-icon="fa fa-lg fa-fw fa-tags" title="Coupon" role="admin" />
+    <!-- Group -->
+    <nav:group data-view="/forum_list" class="remove_submenu" data-icon="fa fa-lg fa-fw fa-book" title="Forums" role="admin">
+        <nav:item data-view="/forum_list" data-icon="fa fa-lg fa-fw fa-book" title="Forums" role="admin" />
+        <nav:item data-view="/waiting_forum_list" data-icon="fa fa-lg fa-fw fa-book" title="Waiting List" role="admin" />
+    </nav:group>
+    <!-- End Group -->
+    <nav:item data-view="/admin_list" class="main_menu" data-icon="fa fa-lg fa-fw fa-user-secret" title="Admin" role="admin" />
+
+
+    <nav:item data-view="/questionnaire" class="main_menu" data-icon="fa fa-lg fa-fw fa-question-circle" title="Questionnaire"
+        role="admin" />
+    <nav:item data-view="/push" class="main_menu" data-icon="fa fa-lg fa-fw fa-bell" title="Push" role="admin" />
+
+    <nav:group data-view="/aboutus" class="remove_submenu" data-icon="fa fa-lg fa-fw fa-book" title="Content" role="admin">
+        <nav:item data-view="/aboutus" data-icon="fa fa-lg fa-fw fa-book" title="About US" role="admin" />
+        <nav:item data-view="/terms&condition" data-icon="fa fa-lg fa-fw fa-book" title="Terms & Condition" role="admin" />
+        <nav:item data-view="/que_ans_list" data-icon="fa fa-lg fa-fw fa-book" title="Q & A" role="admin" />
+        <nav:item data-view="/help" data-icon="fa fa-lg fa-fw fa-book" title="Help" role="admin" />
+        <nav:item data-view="/header_content" data-icon="fa fa-lg fa-fw fa-book" title="Header Content" role="admin" />
+        <nav:item data-view="/footer_content" data-icon="fa fa-lg fa-fw fa-book" title="Footer Content" role="admin" />
+    </nav:group>
+
+</navigation>
+<span class="minifyme" data-action="minifyMenu">
+    <i class="fa fa-arrow-circle-left hit"></i>
+</span>
